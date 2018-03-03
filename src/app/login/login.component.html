@@ -1,3 +1,16 @@
-<p>
-  login works!
-</p>
+<mat-card class="login-form">
+  <mat-card-content class="login-form-content">
+    <mat-form-field>
+      <mat-select required="true" [(value)]="serverUrl" placeholder="Server">
+        <mat-option value="https://todos.venturedevs.net/">https://todos.venturedevs.net/</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button (click)="loginWithGoogle()">LOGIN WITH GOOGLE</button>
+    <button mat-button>CONTINUE ANONYMOUSLY</button>
+  </mat-card-actions>
+</mat-card>
+
+

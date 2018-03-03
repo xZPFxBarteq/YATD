@@ -1,0 +1,12 @@
+.login-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.login-form-content {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
