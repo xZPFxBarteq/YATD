@@ -1,0 +1,22 @@
+<div class="todoLists">
+  <div class="todoListRow" *ngFor="let todoList of todoLists">
+    <button mat-button (click)="removeList(todoList.id)">Remove</button>
+    <button mat-button (click)="editListName(todoList)">Edit name</button>
+    <mat-expansion-panel [disabled]="isCurrentlyEdited(todoList)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="name-edit" *ngIf="isCurrentlyEdited(todoList)" >
+            <mat-form-field>
+                <input  matInput [(ngModel)]="editedList.name">
+            </mat-form-field>
+            <button mat-button (click)="updateListName($event)">Accept</button>
+          </div>
+          <span *ngIf="!isCurrentlyEdited(todoList)">{{todoList.name}}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="listContent">
+        some stuff
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>
