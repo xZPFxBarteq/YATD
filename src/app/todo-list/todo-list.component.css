@@ -4,6 +4,10 @@
   margin-top: 50px;
 }
 
+.add-new-row button {
+  height: 48px;
+}
+
 .todoListRow {
   display: flex;
 }
