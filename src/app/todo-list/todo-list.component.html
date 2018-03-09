@@ -1,33 +1,17 @@
-<div class="todoLists">
-  <div class="add-new-row">
-    <button mat-button
-            [disabled]="newListNameIsEmpty()"
-            (click)="addNewList()">Add new</button>
-    <mat-form-field>
-      <input  matInput
-              placeholder="Name"
-              [(ngModel)]="newListName">
-    </mat-form-field>
-  </div>
-  <div [id]="todoList.id" class="todoListRow" *ngFor="let todoList of todoLists">
-    <button mat-button (click)="removeList(todoList.id)">Remove</button>
-    <button mat-button (click)="editListName(todoList)">Edit name</button>
-    <mat-expansion-panel [disabled]="isCurrentlyEdited(todoList)">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <div class="name-edit" *ngIf="isCurrentlyEdited(todoList)" >
-            <mat-form-field>
-                <input  matInput [(ngModel)]="editedList.name">
-            </mat-form-field>
-            <button mat-button (click)="updateListName($event)">Accept</button>
-            <button mat-button (click)="cancelListNameEdit($event)">Cancel</button>
-          </div>
-          <span *ngIf="!isCurrentlyEdited(todoList)">{{todoList.name}}</span>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="listContent">
-        some stuff
-      </div>
-    </mat-expansion-panel>
-  </div>
-</div>
+<new-todo-list (onNewListAdded)="refreshLists()"></new-todo-list>
+<mat-list class="to-do-lists">
+  <mat-divider></mat-divider>
+  <mat-list-item [id]="todoList.id"
+                 *ngFor="let todoList of todoLists">
+    <button mat-mini-fab (click)="removeList(todoList.id)">
+      <mat-icon svgIcon="delete"></mat-icon>
+    </button>
+    <button mat-mini-fab (click)="nameHeader.editListName()">
+      <mat-icon svgIcon="edit"></mat-icon>
+    </button>
+    <todo-list-name-header [toDoList]="todoList"
+                           (onNameUpdate)="refreshLists()"
+                           #nameHeader></todo-list-name-header>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>

@@ -1,0 +1,12 @@
+<div class="name-edit" *ngIf="isCurrentlyEdited()" >
+  <mat-form-field>
+    <input  matInput [(ngModel)]="toDoList.name">
+  </mat-form-field>
+  <button mat-mini-fab (click)="updateListName()">
+    <mat-icon svgIcon="accept"></mat-icon>
+  </button>
+  <button mat-mini-fab (click)="cancelListNameEdit()">
+    <mat-icon svgIcon="cancel"></mat-icon>
+  </button>
+</div>
+<span *ngIf="!isCurrentlyEdited()">{{toDoList.name}}</span>

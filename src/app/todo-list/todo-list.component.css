@@ -1,36 +1,11 @@
-.todoLists {
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-top: 50px;
-}
-
-.add-new-row button {
-  height: 48px;
-}
-
-.todoListRow {
-  display: flex;
-}
-
-.todoListRow button {
-  align-self: flex-start;
-  height: 48px;
+.to-do-lists button {
   margin-left: 5px;
 }
 
-.todoListRow mat-expansion-panel {
+.to-do-lists todo-list-name-header {
   margin-left: 5px;
-  width: 100%;
+  cursor: pointer;
 }
 
-.todoListRow .mat-expanded {
-  margin-top: 0;
-}
 
-.name-edit input {
-  color: initial;
-}
 
-.name-edit button {
-  color: buttontext;
-}

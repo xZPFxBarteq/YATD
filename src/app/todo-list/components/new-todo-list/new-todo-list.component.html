@@ -1,0 +1,12 @@
+<div class="add-new-row">
+  <button mat-mini-fab
+          [disabled]="newListNameIsEmpty()"
+          (click)="addNewList()">
+    <mat-icon svgIcon="add"></mat-icon>
+  </button>
+  <mat-form-field>
+    <input  matInput
+            placeholder="Name"
+            [(ngModel)]="newListName">
+  </mat-form-field>
+</div>
