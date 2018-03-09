@@ -1,0 +1,12 @@
+.search {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.search button {
+  margin-left: 50px;
+}
+
+.search mat-form-field {
+  min-width: 324px;
+}

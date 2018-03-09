@@ -1,0 +1,10 @@
+<div class='search'>
+  <button mat-mini-fab (click)="cancelSearch()">
+    <mat-icon svgIcon="cancel"></mat-icon>
+  </button>
+  <mat-form-field>
+    <input matInput
+           placeholder="Search"
+           [(ngModel)]="searchedValue">
+  </mat-form-field>
+</div>
