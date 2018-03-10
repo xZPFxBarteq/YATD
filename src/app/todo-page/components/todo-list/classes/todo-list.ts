@@ -1,4 +1,4 @@
-export class ToDoList {
+export class TodoList {
 
   id : string;
   name : string;

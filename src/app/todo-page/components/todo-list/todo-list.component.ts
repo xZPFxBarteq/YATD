@@ -1,18 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {ToDoListRepositoryService} from "./services/to-do-list-repository.service";
-import {ToDoList} from "./classes/to-do-list";
+import {TodoListRepositoryService} from "./services/todo-list-repository.service";
+import {TodoList} from "./classes/todo-list";
 import {TodoListArrayUpdaterService} from "./services/todo-list-array-updater.service";
 
 @Component({
-  selector : 'app-todo-list',
+  selector : 'todo-lists',
   templateUrl : './todo-list.component.html',
   styleUrls : ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
 
-  protected todoLists : ToDoList[] = [];
+  protected todoLists : TodoList[] = [];
 
-  constructor(private todoListRepository : ToDoListRepositoryService,
+
+  constructor(private todoListRepository : TodoListRepositoryService,
               private listsUpdater : TodoListArrayUpdaterService) {
   }
 

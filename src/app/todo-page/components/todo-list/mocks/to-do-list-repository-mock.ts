@@ -6,7 +6,8 @@ import * as _ from "lodash";
 export class ToDoListRepositoryMock {
 
   private lists : TodoList[] = [
-    this.newToDoList('existingTestList')
+    this.newToDoList('existingTestList'),
+    this.newToDoList('secondTestList')
   ];
 
   public getAllLists() : Observable<TodoList[]> {

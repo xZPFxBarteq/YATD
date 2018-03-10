@@ -22,7 +22,8 @@ export class TodoFixture<T> {
   }
 
   public cssQuery(css : string) : any {
-    return this.fixture.debugElement.query(By.css(css)).nativeElement;
+    let debugElement = this.fixture.debugElement.query(By.css(css));
+    return debugElement != null ? debugElement.nativeElement : debugElement;
   }
 
   public clickButton(buttonSelector : string) : void {
