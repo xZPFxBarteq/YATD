@@ -1,22 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService, GoogleLoginProvider, SocialUser} from "angularx-social-login";
+import {AuthService, GoogleLoginProvider} from "angularx-social-login";
+import {Router} from "@angular/router";
 
 @Component({
-  selector : 'app-login',
+  selector : 'login',
   templateUrl : './login.component.html',
   styleUrls : ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  protected user : SocialUser;
   protected serverUrl : string = 'https://todos.venturedevs.net/'
 
-  constructor(private authService : AuthService) {
+  constructor(private authService : AuthService,
+              private router : Router) {
   }
 
   ngOnInit() {
     this.authService.authState.subscribe(user => {
-      this.user = user;
+      if (user != null) {
+        this.router.navigateByUrl('/lists');
+      }
     });
   }
 
@@ -24,8 +27,8 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  isLoggedIn() : boolean {
-    return this.user != null;
+  loginAnonymously() : void {
+    this.router.navigateByUrl('/lists');
   }
 
 }
