@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 
 import {TodoListNameComponent} from './todo-list-name.component';
 import {FormsModule} from "@angular/forms";
@@ -6,11 +6,11 @@ import {ToDoListRepositoryMock} from "../../mocks/to-do-list-repository-mock";
 import {MaterialModule} from "../../../../../modules/material.module";
 import {TodoListRepositoryService} from "../../services/todo-list-repository.service";
 import {TodoList} from "../../classes/todo-list";
-import {By} from "@angular/platform-browser";
+import {TodoFixture} from "../../../../../shared/classes/todo-fixture";
 
 describe('TodoListNameComponent', () => {
   let component : TodoListNameComponent;
-  let fixture : ComponentFixture<TodoListNameComponent>;
+  let fixture : TodoFixture<TodoListNameComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,9 +24,8 @@ describe('TodoListNameComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TodoListNameComponent);
+    fixture = new TodoFixture<TodoListNameComponent>(TestBed.createComponent(TodoListNameComponent));
     component = fixture.componentInstance;
-    // fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -35,11 +34,11 @@ describe('TodoListNameComponent', () => {
 
   it('should display list name if not in edit mode', () => {
     //when
-    component.todoList = todoList('existingTestList');
+    component.todoList = fixture.todoList('existingTestList');
     fixture.detectChanges();
 
     //then
-    expect(cssQuery('span').textContent).toEqual('existingTestList');
+    expect(fixture.cssQuery('span').textContent).toEqual('existingTestList');
   });
 
   it('should display input with list name as value in edit mode', () => {
@@ -48,7 +47,7 @@ describe('TodoListNameComponent', () => {
 
     //then
     fixture.whenStable().then(() => {
-      expect(cssQuery('.name-edit mat-form-field input').value).toEqual('existingTestList');
+      expect(fixture.cssQuery('.name-edit mat-form-field input').value).toEqual('existingTestList');
     });
   });
 
@@ -58,7 +57,7 @@ describe('TodoListNameComponent', () => {
 
     //then
     fixture.whenStable().then(() => {
-      expect(cssQuery('.name-edit button:nth-child(2)')).not.toBeNull();
+      expect(fixture.cssQuery('.name-edit button:nth-child(2)')).not.toBeNull();
     });
   });
 
@@ -68,7 +67,7 @@ describe('TodoListNameComponent', () => {
 
     //then
     fixture.whenStable().then(() => {
-      expect(cssQuery('.name-edit button:nth-child(3)')).not.toBeNull();
+      expect(fixture.cssQuery('.name-edit button:nth-child(3)')).not.toBeNull();
     });
   });
 
@@ -78,9 +77,9 @@ describe('TodoListNameComponent', () => {
 
     //then
     fixture.whenStable().then(() => {
-      setInputValue('.name-edit mat-form-field input', 'changedListName');
-      clickButton('.name-edit button:nth-child(2)');
-      expect(cssQuery('span').textContent).toEqual('changedListName');
+      fixture.setInputValue('.name-edit mat-form-field input', 'changedListName');
+      fixture.clickButton('.name-edit button:nth-child(2)');
+      expect(fixture.cssQuery('span').textContent).toEqual('changedListName');
     });
   });
 
@@ -90,9 +89,9 @@ describe('TodoListNameComponent', () => {
 
     //then
     fixture.whenStable().then(() => {
-      setInputValue('.name-edit mat-form-field input', 'changedListName');
-      clickButton('.name-edit button:nth-child(3)');
-      expect(cssQuery('span').textContent).toEqual('existingTestList');
+      fixture.setInputValue('.name-edit mat-form-field input', 'changedListName');
+      fixture.clickButton('.name-edit button:nth-child(3)');
+      expect(fixture.cssQuery('span').textContent).toEqual('existingTestList');
     });
   });
 
@@ -103,52 +102,24 @@ describe('TodoListNameComponent', () => {
 
     //then
     fixture.whenStable().then(() => {
-      setInputValue('.name-edit mat-form-field input', 'changedListName');
-      clickButton('.name-edit button:nth-child(2)');
+      fixture.setInputValue('.name-edit mat-form-field input', 'changedListName');
+      fixture.clickButton('.name-edit button:nth-child(2)');
       expect(component.onNameUpdate.emit).toHaveBeenCalled();
     });
   });
 
   it('should emit event after component has been clicked', () => {
-    component.todoList = todoList('existingTestList');
+    component.todoList = fixture.todoList('existingTestList');
     component.onListClicked.subscribe((clickedList : TodoList) => {
       expect(clickedList.name).toEqual('existingTestList');
     });
     fixture.detectChanges();
-    clickElement('span');
+    fixture.clickElement('span');
   });
 
   function enterEditMode() : void {
-    component.todoList = todoList('existingTestList');
+    component.todoList = fixture.todoList('existingTestList');
     component.editListName();
-    fixture.detectChanges();
-  }
-
-  function clickButton(buttonSelector : string) : void {
-    cssQuery(buttonSelector).click();
-    fixture.detectChanges();
-  }
-
-  function clickElement(elementSelector : string) : void {
-    fixture.debugElement.query(By.css(elementSelector)).triggerEventHandler('click', null);
-    fixture.detectChanges();
-  }
-
-  function cssQuery(css : string) : any {
-    return fixture.debugElement.query(By.css(css)).nativeElement;
-  }
-
-  function todoList(name : string) : TodoList {
-    let list : TodoList = new TodoList();
-    list.id = name;
-    list.name = name;
-    return list;
-  }
-
-  function setInputValue(inputSelector : string, value : string) : void {
-    let input : HTMLInputElement = cssQuery(inputSelector);
-    input.value = value;
-    input.dispatchEvent(new Event('input'));
     fixture.detectChanges();
   }
 

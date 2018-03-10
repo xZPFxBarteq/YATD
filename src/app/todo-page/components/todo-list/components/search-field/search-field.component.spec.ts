@@ -1,13 +1,13 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 
 import {SearchFieldComponent} from './search-field.component';
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "../../../../../modules/material.module";
-import {By} from "@angular/platform-browser";
+import {TodoFixture} from "../../../../../shared/classes/todo-fixture";
 
 describe('SearchFieldComponent', () => {
   let component : SearchFieldComponent;
-  let fixture : ComponentFixture<SearchFieldComponent>;
+  let fixture : TodoFixture<SearchFieldComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,36 +18,25 @@ describe('SearchFieldComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchFieldComponent);
+    fixture = new TodoFixture<SearchFieldComponent>(TestBed.createComponent(SearchFieldComponent));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should bind input to searchedValue', () => {
     //when
-    setInputValue('.search mat-form-field input', 'test');
+    fixture.setInputValue('.search mat-form-field input', 'test');
     //then
     expect(component.searchedValue).toEqual('test');
   });
 
   it('should clear input after clear button has been pressed', () => {
     //given
-    setInputValue('.search mat-form-field input', 'test');
+    fixture.setInputValue('.search mat-form-field input', 'test');
     //when
-    cssQuery('.search button').click();
+    fixture.cssQuery('.search button').clickButton();
     //then
     expect(component.searchedValue).toEqual('');
   });
-
-  function cssQuery(css : string) : any {
-    return fixture.debugElement.query(By.css(css)).nativeElement;
-  }
-
-  function setInputValue(inputSelector : string, value : string) : void {
-    let input : HTMLInputElement = cssQuery(inputSelector);
-    input.value = value;
-    input.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-  }
 
 });
