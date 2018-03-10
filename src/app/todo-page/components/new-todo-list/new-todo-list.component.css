@@ -1,8 +1,13 @@
 .add-new-row {
   padding-top: 8px;
   padding-left: 16px;
+  padding-right: 16px;
 }
 
 .add-new-row button {
   margin-left: 50px;
+}
+
+.add-new-row mat-form-field {
+  min-width: 324px;
 }

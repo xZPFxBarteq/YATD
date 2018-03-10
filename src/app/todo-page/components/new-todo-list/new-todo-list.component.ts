@@ -1,17 +1,17 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ToDoListRepositoryService} from "../../services/to-do-list-repository.service";
+import {TodoListRepositoryService} from "../todo-list/services/todo-list-repository.service";
 
 @Component({
   selector: 'new-todo-list',
   templateUrl: './new-todo-list.component.html',
   styleUrls: ['./new-todo-list.component.css']
 })
-export class NewToDoListComponent implements OnInit {
+export class NewTodoListComponent implements OnInit {
 
   protected newListName : string = '';
-  @Output() protected onNewListAdded = new EventEmitter<void>();
+  @Output() public onNewListAdded = new EventEmitter<void>();
 
-  constructor(private todoListRepository : ToDoListRepositoryService) { }
+  constructor(private todoListRepository : TodoListRepositoryService) { }
 
   ngOnInit() {
   }
