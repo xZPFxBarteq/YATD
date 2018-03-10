@@ -1,0 +1,20 @@
+.lists-page {
+  display: flex;
+}
+
+.lists {
+  flex: 25%;
+  min-width: 450px;
+}
+
+.list-content {
+  flex: 75%;
+}
+
+.lists-page mat-card {
+  height: calc(100vh - 130px);
+}
+
+.list-content {
+  width: 100%;
+}

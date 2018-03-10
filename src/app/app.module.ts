@@ -5,41 +5,48 @@ import {HttpClientModule} from "@angular/common/http";
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
-import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatOptionModule,
-  MatSelectModule
-} from "@angular/material";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from "angularx-social-login";
+import {AppRoutingModule} from './modules/app-routing.module';
+import {MaterialModule} from './modules/material.module';
+import {UserBarComponent} from './user-bar/user-bar.component';
+import {TodoPageComponent} from './todo-page/todo-page.component';
+import {NewTodoListComponent} from './todo-page/components/new-todo-list/new-todo-list.component';
+import {TodoListComponent} from "./todo-page/components/todo-list/todo-list.component";
+import {TodoListNameComponent} from "./todo-page/components/todo-list/components/todo-list-name/todo-list-name.component";
+import {TodoListNameSearchPipe} from "./todo-page/components/todo-list/pipes/todo-list-name-search.pipe";
+import {SearchFieldComponent} from "./todo-page/components/todo-list/components/search-field/search-field.component";
+import {TodoListRepositoryService} from "./todo-page/components/todo-list/services/todo-list-repository.service";
+import {TodoListArrayUpdaterService} from "./todo-page/components/todo-list/services/todo-list-array-updater.service";
 
 let authorizationConfig = new AuthServiceConfig([
   {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("991607936961-c5fair5rk2mp0q05nv52e09ddjm3pp8f.apps.googleusercontent.com")
+    id : GoogleLoginProvider.PROVIDER_ID,
+    provider : new GoogleLoginProvider("991607936961-c5fair5rk2mp0q05nv52e09ddjm3pp8f.apps.googleusercontent.com")
   }
 ]);
 
 @NgModule({
   declarations : [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    TodoListComponent,
+    UserBarComponent,
+    TodoListNameComponent,
+    TodoPageComponent,
+    NewTodoListComponent,
+    TodoListNameSearchPipe,
+    SearchFieldComponent
   ],
   imports : [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatCheckboxModule,
+    AppRoutingModule,
+    MaterialModule,
     SocialLoginModule.initialize(authorizationConfig)
   ],
-  providers : [],
+  providers : [TodoListRepositoryService, TodoListArrayUpdaterService],
   bootstrap : [AppComponent]
 })
 export class AppModule {

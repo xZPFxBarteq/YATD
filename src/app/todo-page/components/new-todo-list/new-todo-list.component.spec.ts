@@ -38,7 +38,6 @@ describe('NewTodoListComponent', () => {
 
   it('should enable add button when list name is present', () => {
     fixture.setInputValue('.add-new-row mat-form-field input', 'newListName');
-    fixture.detectChanges();
     expect(fixture.cssQuery('.add-new-row button').disabled).toBeFalsy();
   });
 

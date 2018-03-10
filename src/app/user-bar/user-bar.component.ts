@@ -3,7 +3,7 @@ import {AuthService, SocialUser} from "angularx-social-login";
 import {Router} from "@angular/router";
 
 @Component({
-  selector : 'app-user-bar',
+  selector : 'user-bar',
   templateUrl : './user-bar.component.html',
   styleUrls : ['./user-bar.component.css']
 })

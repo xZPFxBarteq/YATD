@@ -1,0 +1,16 @@
+<div class="lists-page">
+  <mat-card>
+    <mat-card-content>
+      <div class="lists">
+        <new-todo-list (onNewListAdded)="lists.refreshLists()"></new-todo-list>
+        <mat-divider></mat-divider>
+        <todo-lists #lists></todo-lists>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="list-content">
+    <mat-card-content>
+      content
+    </mat-card-content>
+  </mat-card>
+</div>
