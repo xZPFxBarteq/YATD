@@ -1,25 +1,25 @@
 import {TestBed, inject, async} from '@angular/core/testing';
 
-import {ToDoListRepositoryService} from './to-do-list-repository.service';
+import {TodoListRepositoryService} from './todo-list-repository.service';
 import {HttpClientModule} from "@angular/common/http";
 
-describe('ToDoListRepositoryService', () => {
+describe('TodoListRepositoryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports : [
         HttpClientModule
       ],
-      providers : [ToDoListRepositoryService]
+      providers : [TodoListRepositoryService]
     });
   });
 
-  it('should be created', inject([ToDoListRepositoryService], (service : ToDoListRepositoryService) => {
+  it('should be created', inject([TodoListRepositoryService], (service : TodoListRepositoryService) => {
     expect(service).toBeTruthy();
   }));
 
   //more of a development test to check if API is working properly
   //disabled as it's dependent on external API
-  it('should add and remove to do list', async(inject([ToDoListRepositoryService], (service : ToDoListRepositoryService) => {
+  xit('should add and remove to do list', async(inject([TodoListRepositoryService], (service : TodoListRepositoryService) => {
     service.addNewList('FUNNY_LIST').subscribe(savedToDoList => {
       service.getAllLists().subscribe(toDoLists => {
         expect(toDoLists)
@@ -41,7 +41,7 @@ describe('ToDoListRepositoryService', () => {
     });
   })));
 
-  it('should update to do list', async(inject([ToDoListRepositoryService], (service : ToDoListRepositoryService) => {
+  xit('should update to do list', async(inject([TodoListRepositoryService], (service : TodoListRepositoryService) => {
     service.addNewList('FUNNY_LIST').subscribe(savedToDoList => {
       service.getAllLists().subscribe(toDoLists => {
         expect(toDoLists)
