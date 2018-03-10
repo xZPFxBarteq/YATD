@@ -18,6 +18,7 @@ import {TodoListNameSearchPipe} from "./todo-page/components/todo-list/pipes/tod
 import {SearchFieldComponent} from "./todo-page/components/todo-list/components/search-field/search-field.component";
 import {TodoListRepositoryService} from "./todo-page/components/todo-list/services/todo-list-repository.service";
 import {TodoListArrayUpdaterService} from "./todo-page/components/todo-list/services/todo-list-array-updater.service";
+import {TodoComponent} from './todo-page/components/todo/todo.component';
 
 let authorizationConfig = new AuthServiceConfig([
   {
@@ -36,7 +37,8 @@ let authorizationConfig = new AuthServiceConfig([
     TodoPageComponent,
     NewTodoListComponent,
     TodoListNameSearchPipe,
-    SearchFieldComponent
+    SearchFieldComponent,
+    TodoComponent
   ],
   imports : [
     BrowserModule,

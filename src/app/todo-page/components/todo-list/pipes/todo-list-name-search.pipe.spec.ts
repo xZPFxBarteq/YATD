@@ -1,5 +1,6 @@
 import { TodoListNameSearchPipe } from './todo-list-name-search.pipe';
 import {TodoList} from "../classes/todo-list";
+import {Todo} from "../../todo/classes/todo";
 
 describe('TodoListNameSearchPipe', () => {
 
@@ -18,11 +19,26 @@ describe('TodoListNameSearchPipe', () => {
     expect(filteredLists).toEqual([todoList('abc'), todoList('ab')]);
   });
 
+  it('should filter by todo name', () => {
+    //given
+    let todos : Todo[] = [todo('abc'), todo('def'),  todo('ab')];
+    //when
+    let filteredTodos : Todo[] = pipe.transform(todos, 'a');
+    //then
+    expect(filteredTodos).toEqual([todo('abc'), todo('ab')]);
+  });
+
 
   function todoList(name : string) : TodoList {
     let list : TodoList = new TodoList();
     list.name = name;
     return list;
+  }
+
+  function todo(name : string) : Todo {
+    let todo : Todo = new Todo();
+    todo.name = name;
+    return todo;
   }
 
 });
