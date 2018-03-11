@@ -9,8 +9,9 @@
     <button mat-mini-fab (click)="nameHeader.editListName()">
       <mat-icon svgIcon="edit"></mat-icon>
     </button>
-    <todo-list-name [todoList]="todoList"
-                    (onNameUpdate)="refreshLists()"
+    <todo-list-name [id]="todoList.id"
+                    [name]="todoList.name"
+                    (onNameUpdate)="updateListName($event)"
                     (onListClicked)="selectList($event)"
                     #nameHeader></todo-list-name>
     <mat-divider></mat-divider>

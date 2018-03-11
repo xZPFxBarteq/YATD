@@ -1,19 +1,19 @@
 import {async, TestBed} from '@angular/core/testing';
 
-import {NewTodoListComponent} from './new-todo-list.component';
+import {NewItemComponent} from './new-item.component';
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "../../../modules/material.module";
-import {TodoFixture} from "../../../shared/classes/todo-fixture";
-import {ToDoListRepositoryMock} from "../todo-list/mocks/to-do-list-repository-mock";
-import {TodoListRepositoryService} from "../todo-list/services/todo-list-repository.service";
+import {TodoFixture} from "../../classes/todo-fixture";
+import {ToDoListRepositoryMock} from "../../../todo-page/components/todo-list/mocks/to-do-list-repository-mock";
+import {TodoListRepositoryService} from "../../../todo-page/components/todo-list/services/todo-list-repository.service";
 
-describe('NewTodoListComponent', () => {
-  let component : NewTodoListComponent;
-  let fixture : TodoFixture<NewTodoListComponent>;
+describe('NewItemComponent', () => {
+  let component : NewItemComponent;
+  let fixture : TodoFixture<NewItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations : [NewTodoListComponent],
+      declarations : [NewItemComponent],
       imports : [MaterialModule, FormsModule],
       providers : [
         {provide : TodoListRepositoryService, useClass : ToDoListRepositoryMock}
@@ -23,7 +23,7 @@ describe('NewTodoListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = new TodoFixture(TestBed.createComponent(NewTodoListComponent));
+    fixture = new TodoFixture(TestBed.createComponent(NewItemComponent));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -42,11 +42,11 @@ describe('NewTodoListComponent', () => {
   });
 
   it('should emit event when new list is added', async(() => {
-    spyOn(component.onNewListAdded, 'emit');
+    spyOn(component.onNewItemAdded, 'emit');
     fixture.setInputValue('.add-new-row mat-form-field input', 'newListName');
     fixture.clickButton('.add-new-row button');
     fixture.whenStable().then(() => {
-      expect(component.onNewListAdded.emit).toHaveBeenCalled();
+      expect(component.onNewItemAdded.emit).toHaveBeenCalled();
     });
   }));
 

@@ -11,7 +11,7 @@ import {AppRoutingModule} from './modules/app-routing.module';
 import {MaterialModule} from './modules/material.module';
 import {UserBarComponent} from './user-bar/user-bar.component';
 import {TodoPageComponent} from './todo-page/todo-page.component';
-import {NewTodoListComponent} from './todo-page/components/new-todo-list/new-todo-list.component';
+import {NewItemComponent} from './shared/components/new-item/new-item.component';
 import {TodoListComponent} from "./todo-page/components/todo-list/todo-list.component";
 import {TodoListNameComponent} from "./todo-page/components/todo-list/components/todo-list-name/todo-list-name.component";
 import {TodoListNameSearchPipe} from "./todo-page/components/todo-list/pipes/todo-list-name-search.pipe";
@@ -36,7 +36,7 @@ let authorizationConfig = new AuthServiceConfig([
     UserBarComponent,
     TodoListNameComponent,
     TodoPageComponent,
-    NewTodoListComponent,
+    NewItemComponent,
     TodoListNameSearchPipe,
     SearchFieldComponent,
     TodoComponent

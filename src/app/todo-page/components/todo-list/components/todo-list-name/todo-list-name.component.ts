@@ -1,6 +1,7 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {TodoList} from "../../classes/todo-list";
 import {TodoListRepositoryService} from "../../services/todo-list-repository.service";
+import {NameChangeEvent} from "../../../../../shared/classes/name-change-event";
 
 @Component({
   selector: 'todo-list-name',
@@ -9,48 +10,49 @@ import {TodoListRepositoryService} from "../../services/todo-list-repository.ser
 })
 export class TodoListNameComponent implements OnInit {
 
-  @Input() public todoList : TodoList = null;
-  @Output() public onNameUpdate = new EventEmitter<void>();
-  @Output() public onListClicked = new EventEmitter<TodoList>();
-  protected listNameBeforeEdit : string = null;
+  @Input() public id : string = '';
+  @Input() public name : string = '';
+  @Output() public onNameUpdate = new EventEmitter<NameChangeEvent>();
+  @Output() public onListClicked = new EventEmitter<string>();
+  protected nameBeforeEdit : string = null;
 
-  constructor(private todoListRepository : TodoListRepositoryService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   editListName() : void {
-    this.listNameBeforeEdit = this.todoList.name;
+    this.nameBeforeEdit = this.name;
   }
 
   isCurrentlyEdited() : boolean {
-    return this.listNameBeforeEdit !== null;
+    return this.nameBeforeEdit !== null;
   }
 
   updateListName() : void {
     if (this.listNameChangedAndNotEmpty()) {
-      this.todoListRepository.updateListName(this.todoList.id, this.todoList.name).subscribe(() => this.onNameUpdate.emit());
+      this.onNameUpdate.emit(new NameChangeEvent(this.id, this.name));
     } else {
-      this.todoList.name = this.listNameBeforeEdit;
+      this.name = this.nameBeforeEdit;
     }
     this.stopEditing();
   }
 
   cancelListNameEdit() : void {
-    this.todoList.name = this.listNameBeforeEdit;
+    this.name = this.nameBeforeEdit;
     this.stopEditing();
   }
 
   @HostListener('click') onClick() : void {
-    this.onListClicked.emit(this.todoList);
+    this.onListClicked.emit(this.id);
   }
 
   private listNameChangedAndNotEmpty() : boolean {
-    return this.todoList.name != this.listNameBeforeEdit && this.todoList.name != '';
+    return this.name != this.nameBeforeEdit && this.name != '';
   }
 
   private stopEditing() : void {
-    this.listNameBeforeEdit = null;
+    this.nameBeforeEdit = null;
   }
 
 
