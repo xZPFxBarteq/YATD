@@ -2,8 +2,8 @@ import {async, TestBed} from '@angular/core/testing';
 
 import {SearchFieldComponent} from './search-field.component';
 import {FormsModule} from "@angular/forms";
-import {MaterialModule} from "../../../../../modules/material.module";
-import {TodoFixture} from "../../../../../shared/classes/todo-fixture";
+import {MaterialModule} from "../../../modules/material.module";
+import {TodoFixture} from "../../classes/todo-fixture";
 
 describe('SearchFieldComponent', () => {
   let component : SearchFieldComponent;

@@ -13,9 +13,9 @@ import {UserBarComponent} from './user-bar/user-bar.component';
 import {TodoPageComponent} from './todo-page/todo-page.component';
 import {NewItemComponent} from './shared/components/new-item/new-item.component';
 import {TodoListComponent} from "./todo-page/components/todo-list/todo-list.component";
-import {TodoListNameComponent} from "./todo-page/components/todo-list/components/todo-list-name/todo-list-name.component";
+import {EditableNameItemComponent} from "./shared/components/editable-name-item/editable-name-item.component";
 import {TodoListNameSearchPipe} from "./todo-page/components/todo-list/pipes/todo-list-name-search.pipe";
-import {SearchFieldComponent} from "./todo-page/components/todo-list/components/search-field/search-field.component";
+import {SearchFieldComponent} from "./shared/components/search-field/search-field.component";
 import {TodoListRepositoryService} from "./todo-page/components/todo-list/services/todo-list-repository.service";
 import {TodoListArrayUpdaterService} from "./todo-page/components/todo-list/services/todo-list-array-updater.service";
 import {TodoComponent} from './todo-page/components/todo/todo.component';
@@ -34,7 +34,7 @@ let authorizationConfig = new AuthServiceConfig([
     LoginComponent,
     TodoListComponent,
     UserBarComponent,
-    TodoListNameComponent,
+    EditableNameItemComponent,
     TodoPageComponent,
     NewItemComponent,
     TodoListNameSearchPipe,

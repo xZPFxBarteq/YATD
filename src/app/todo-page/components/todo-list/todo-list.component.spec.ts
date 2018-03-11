@@ -7,8 +7,8 @@ import {ToDoListRepositoryMock} from "./mocks/to-do-list-repository-mock";
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "../../../modules/material.module";
 import {TodoFixture} from "../../../shared/classes/todo-fixture";
-import {SearchFieldComponent} from "./components/search-field/search-field.component";
-import {TodoListNameComponent} from "./components/todo-list-name/todo-list-name.component";
+import {SearchFieldComponent} from "../../../shared/components/search-field/search-field.component";
+import {EditableNameItemComponent} from "../../../shared/components/editable-name-item/editable-name-item.component";
 import {TodoListNameSearchPipe} from "./pipes/todo-list-name-search.pipe";
 
 describe('TodoListComponent', () => {
@@ -17,7 +17,7 @@ describe('TodoListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations : [TodoListComponent, SearchFieldComponent, TodoListNameComponent, TodoListNameSearchPipe],
+      declarations : [TodoListComponent, SearchFieldComponent, EditableNameItemComponent, TodoListNameSearchPipe],
       imports : [MaterialModule, FormsModule],
       providers : [
         {provide : TodoListRepositoryService, useClass : ToDoListRepositoryMock},

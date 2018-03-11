@@ -1,20 +1,20 @@
 import {async, TestBed} from '@angular/core/testing';
 
-import {TodoListNameComponent} from './todo-list-name.component';
+import {EditableNameItemComponent} from './editable-name-item.component';
 import {FormsModule} from "@angular/forms";
-import {ToDoListRepositoryMock} from "../../mocks/to-do-list-repository-mock";
-import {MaterialModule} from "../../../../../modules/material.module";
-import {TodoListRepositoryService} from "../../services/todo-list-repository.service";
-import {TodoList} from "../../classes/todo-list";
-import {TodoFixture} from "../../../../../shared/classes/todo-fixture";
+import {ToDoListRepositoryMock} from "../../../todo-page/components/todo-list/mocks/to-do-list-repository-mock";
+import {MaterialModule} from "../../../modules/material.module";
+import {TodoListRepositoryService} from "../../../todo-page/components/todo-list/services/todo-list-repository.service";
+import {TodoList} from "../../../todo-page/components/todo-list/classes/todo-list";
+import {TodoFixture} from "../../classes/todo-fixture";
 
-describe('TodoListNameComponent', () => {
-  let component : TodoListNameComponent;
-  let fixture : TodoFixture<TodoListNameComponent>;
+describe('EditableNameItemComponent', () => {
+  let component : EditableNameItemComponent;
+  let fixture : TodoFixture<EditableNameItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations : [TodoListNameComponent],
+      declarations : [EditableNameItemComponent],
       imports : [MaterialModule, FormsModule],
       providers : [
         {provide : TodoListRepositoryService, useClass : ToDoListRepositoryMock}
@@ -24,7 +24,7 @@ describe('TodoListNameComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = new TodoFixture<TodoListNameComponent>(TestBed.createComponent(TodoListNameComponent));
+    fixture = new TodoFixture<EditableNameItemComponent>(TestBed.createComponent(EditableNameItemComponent));
     component = fixture.componentInstance;
   });
 
@@ -110,7 +110,7 @@ describe('TodoListNameComponent', () => {
 
   it('should emit event after component has been clicked', () => {
     component.todoList = fixture.todoList('existingTestList');
-    component.onListClicked.subscribe((clickedList : TodoList) => {
+    component.onItemClicked.subscribe((clickedList : TodoList) => {
       expect(clickedList.name).toEqual('existingTestList');
     });
     fixture.detectChanges();
@@ -119,7 +119,7 @@ describe('TodoListNameComponent', () => {
 
   function enterEditMode() : void {
     component.todoList = fixture.todoList('existingTestList');
-    component.editListName();
+    component.editName();
     fixture.detectChanges();
   }
 
