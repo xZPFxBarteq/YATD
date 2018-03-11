@@ -10,8 +10,9 @@
       <mat-icon svgIcon="edit"></mat-icon>
     </button>
     <todo-list-name [todoList]="todoList"
-                           (onNameUpdate)="refreshLists()"
-                           #nameHeader></todo-list-name>
+                    (onNameUpdate)="refreshLists()"
+                    (onListClicked)="selectList($event)"
+                    #nameHeader></todo-list-name>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>

@@ -41,7 +41,7 @@ export class TodoListNameComponent implements OnInit {
     this.stopEditing();
   }
 
-  @HostListener('clickButton') onClick() : void {
+  @HostListener('click') onClick() : void {
     this.onListClicked.emit(this.todoList);
   }
 

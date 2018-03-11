@@ -7,12 +7,13 @@ import {Todo} from "../classes/todo";
 export class TodoRepositoryService {
 
   private apiUrl : string = 'https://todos.venturedevs.net/api/todos/';
+  private todoListsApiUrl : string = 'https://todos.venturedevs.net/api/todolists/';
 
   constructor(private http : HttpClient) {
   }
 
-  public getAllTodos() : Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.apiUrl);
+  public getTodos(todoListId : string) : Observable<Todo[]> {
+    return this.http.get<Todo[]>(`${this.todoListsApiUrl}${todoListId}`);
   }
 
   public addNewTodo(name : string, todoListId : string) : Observable<Todo> {

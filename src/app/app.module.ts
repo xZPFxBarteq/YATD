@@ -19,6 +19,7 @@ import {SearchFieldComponent} from "./todo-page/components/todo-list/components/
 import {TodoListRepositoryService} from "./todo-page/components/todo-list/services/todo-list-repository.service";
 import {TodoListArrayUpdaterService} from "./todo-page/components/todo-list/services/todo-list-array-updater.service";
 import {TodoComponent} from './todo-page/components/todo/todo.component';
+import {TodoRepositoryService} from "./todo-page/components/todo/services/todo-repository.service";
 
 let authorizationConfig = new AuthServiceConfig([
   {
@@ -48,7 +49,7 @@ let authorizationConfig = new AuthServiceConfig([
     MaterialModule,
     SocialLoginModule.initialize(authorizationConfig)
   ],
-  providers : [TodoListRepositoryService, TodoListArrayUpdaterService],
+  providers : [TodoListRepositoryService, TodoRepositoryService, TodoListArrayUpdaterService],
   bootstrap : [AppComponent]
 })
 export class AppModule {

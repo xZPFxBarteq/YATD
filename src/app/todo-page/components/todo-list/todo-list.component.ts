@@ -11,6 +11,7 @@ import {TodoListArrayUpdaterService} from "./services/todo-list-array-updater.se
 export class TodoListComponent implements OnInit {
 
   protected todoLists : TodoList[] = [];
+  public selectedListId : string = '';
 
 
   constructor(private todoListRepository : TodoListRepositoryService,
@@ -29,6 +30,11 @@ export class TodoListComponent implements OnInit {
     this.todoListRepository.getAllLists().subscribe(todoLists => {
       this.todoLists = this.listsUpdater.updateList(this.todoLists, todoLists);
     });
+  }
+
+  selectList(todoList : TodoList) : void {
+    console.log('selected: ' + todoList.id);
+    this.selectedListId = todoList.id;
   }
 
 
