@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TodoList} from "./classes/todo-list";
 import {NameChangeEvent} from "../../../shared/classes/name-change-event";
+import {TodoListArrayUpdaterService} from "./services/todo-list-array-updater.service";
 import {TodoListRepositoryService} from "./services/todo-list-repository.service";
 
 @Component({
@@ -10,28 +11,37 @@ import {TodoListRepositoryService} from "./services/todo-list-repository.service
 })
 export class TodoListComponent implements OnInit {
 
-  @Input() public todoLists : TodoList[] = [];
-  @Output() public onRemove : EventEmitter<string> = new EventEmitter<string>();
-  @Output() public onNameUpdate : EventEmitter<NameChangeEvent> = new EventEmitter<NameChangeEvent>();
+  public todoLists : TodoList[] = [];
   public selectedListId : string = '';
 
-  constructor() {
+  constructor(private todoListRepository : TodoListRepositoryService,
+              private listsUpdater : TodoListArrayUpdaterService) {
   }
 
   ngOnInit() {
+    this.refreshLists();
   }
 
-  public updateListName(nameChangeEvent : NameChangeEvent) {
-    this.onNameUpdate.emit(nameChangeEvent);
+  public addNewList(name : string) : void {
+    this.todoListRepository.addNewList(name).subscribe(() => this.refreshLists());
+  }
+
+  public updateListName(nameChangeEvent : NameChangeEvent) : void {
+    this.todoListRepository.updateListName(nameChangeEvent.id, nameChangeEvent.name).subscribe(() => this.refreshLists());
   }
 
   public removeList(id : string) : void {
-    this.onRemove.emit(id);
+    this.todoListRepository.removeList(id).subscribe(() => this.refreshLists());
   }
 
   public selectList(listId : string) : void {
     this.selectedListId = listId;
   }
 
+  private refreshLists() : void {
+    this.todoListRepository.getAllLists().subscribe(todoLists => {
+      this.todoLists = this.listsUpdater.updateList(this.todoLists, todoLists);
+    });
+  }
 
 }

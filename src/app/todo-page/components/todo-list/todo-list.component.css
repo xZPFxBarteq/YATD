@@ -1,9 +1,5 @@
-.to-do-lists button {
-  margin-left: 5px;
-}
-
 .to-do-lists editable-name-item {
-  margin-left: 5px;
+  width: 100%;
   cursor: pointer;
 }
 

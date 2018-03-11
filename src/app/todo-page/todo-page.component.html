@@ -2,12 +2,7 @@
   <mat-card>
     <mat-card-content>
       <div class="lists">
-        <new-item (onNewItemAdded)="addNewList($event)"></new-item>
-        <mat-divider></mat-divider>
-        <todo-lists [todoLists]="todoLists"
-                    (onNameUpdate)="updateListName($event)"
-                    (onRemove)="removeList($event)"
-                    #lists></todo-lists>
+        <todo-lists #lists></todo-lists>
       </div>
     </mat-card-content>
   </mat-card>

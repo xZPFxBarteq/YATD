@@ -1,7 +1,12 @@
 <search-field #search></search-field>
 <mat-divider></mat-divider>
-<mat-selection-list class="todo">
-  <mat-list-option *ngFor="let todo of todos | todoListNameSearch:search.searchedValue">
-    {{todo.name}}
-  </mat-list-option>
-</mat-selection-list>
+<mat-list class="todo">
+  <mat-list-item *ngFor="let todo of todos | todoListNameSearch:search.searchedValue">
+    <editable-name-item [id]="todo.id"
+                        [name]="todo.name"
+                        (onRemove)="removeTodo(todo.id)"
+                        (onNameUpdate)="updateTodoName($event)"
+                        #nameHeader></editable-name-item>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+ </mat-list>

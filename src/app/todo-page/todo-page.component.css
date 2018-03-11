@@ -9,12 +9,9 @@
 
 .list-content {
   flex: 75%;
+  width: 100%;
 }
 
 .lists-page mat-card {
   height: calc(100vh - 130px);
-}
-
-.list-content {
-  width: 100%;
 }

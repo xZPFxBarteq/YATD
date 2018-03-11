@@ -1,3 +1,23 @@
+.editable-name-item {
+  display: flex;
+  align-items: center;
+}
+
+.editable-name-item button {
+  margin-left: 5px;
+}
+
+.editable-name-item .name-label {
+  margin-left: 5px;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+}
+
+.name-edit {
+  margin-left: 5px;
+}
+
 .name-edit button {
   margin-left: 5px;
 }

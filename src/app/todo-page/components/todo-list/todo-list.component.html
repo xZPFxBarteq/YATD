@@ -1,19 +1,15 @@
+<new-item (onNewItemAdded)="addNewList($event)"></new-item>
+<mat-divider></mat-divider>
 <search-field #search></search-field>
 <mat-divider></mat-divider>
 <mat-list class="to-do-lists">
   <mat-list-item [id]="todoList.id"
                  *ngFor="let todoList of todoLists | todoListNameSearch:search.searchedValue">
-    <button mat-mini-fab (click)="removeList(todoList.id)">
-      <mat-icon svgIcon="delete"></mat-icon>
-    </button>
-    <button mat-mini-fab (click)="nameHeader.editName()">
-      <mat-icon svgIcon="edit"></mat-icon>
-    </button>
     <editable-name-item [id]="todoList.id"
                         [name]="todoList.name"
+                        (onRemove)="removeList($event)"
                         (onNameUpdate)="updateListName($event)"
-                        (onItemClicked)="selectList($event)"
-                        #nameHeader></editable-name-item>
+                        (onItemClicked)="selectList($event)"></editable-name-item>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
