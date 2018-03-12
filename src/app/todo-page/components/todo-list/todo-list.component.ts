@@ -16,7 +16,7 @@ export class TodoListComponent implements OnInit {
   public selectedList : TodoList = null;
 
   constructor(private todoListRepository : TodoListRepositoryService,
-              private listsUpdater : ArrayUpdaterService) {
+              private arrayUpdater : ArrayUpdaterService) {
   }
 
   ngOnInit() {
@@ -32,7 +32,12 @@ export class TodoListComponent implements OnInit {
   }
 
   public removeList(id : string) : void {
-    this.todoListRepository.removeList(id).subscribe(() => this.refreshLists());
+    this.todoListRepository.removeList(id).subscribe(() => {
+      if(this.selectedList.id == id) {
+        this.selectedList = null;
+      }
+      this.refreshLists()
+    });
   }
 
   public selectList(listId : string) : void {
@@ -43,17 +48,13 @@ export class TodoListComponent implements OnInit {
     return this.selectedList === todoList;
   }
 
-  public selectedListName() : string {
-    return this.selectedList != null ? this.selectedList.name : 'No list selected';
-  }
-
   public selectedListId() : string {
     return this.selectedList != null ? this.selectedList.id : null;
   }
 
   private refreshLists() : void {
     this.todoListRepository.getAllLists().subscribe(todoLists => {
-      this.todoLists = this.listsUpdater.updateList(this.todoLists, todoLists);
+      this.todoLists = this.arrayUpdater.update(this.todoLists, todoLists);
     });
   }
 

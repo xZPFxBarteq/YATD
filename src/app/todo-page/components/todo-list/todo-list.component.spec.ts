@@ -9,7 +9,7 @@ import {MaterialModule} from "../../../modules/material.module";
 import {TodoFixture} from "../../../shared/classes/todo-fixture";
 import {SearchFieldComponent} from "../../../shared/components/search-field/search-field.component";
 import {EditableNameItemComponent} from "../../../shared/components/editable-name-item/editable-name-item.component";
-import {TodoListNameSearchPipe} from "./pipes/todo-list-name-search.pipe";
+import {NameSearchPipe} from "../../../shared/pipes/name-search.pipe";
 
 describe('TodoListComponent', () => {
   let component : TodoListComponent;
@@ -17,7 +17,7 @@ describe('TodoListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations : [TodoListComponent, SearchFieldComponent, EditableNameItemComponent, TodoListNameSearchPipe],
+      declarations : [TodoListComponent, SearchFieldComponent, EditableNameItemComponent, NameSearchPipe],
       imports : [MaterialModule, FormsModule],
       providers : [
         {provide : TodoListRepositoryService, useClass : ToDoListRepositoryMock},

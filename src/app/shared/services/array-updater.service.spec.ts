@@ -20,7 +20,7 @@ describe('ArrayUpdaterService', () => {
     let listsFromServer : TodoList[] = [todoList('c'), todoList('a'), todoList('b')];
 
     //when
-    let todoLists : TodoList[] = service.updateList(currentLists, listsFromServer);
+    let todoLists : TodoList[] = service.update(currentLists, listsFromServer);
 
     //then
     expect(todoLists).toEqual([todoList('a'), todoList('b'), todoList('c')]);
@@ -32,7 +32,7 @@ describe('ArrayUpdaterService', () => {
     let listsFromServer : TodoList[] = [todoList('c'), todoList('a'), todoList('b')];
 
     //when
-    let todoLists : TodoList[] = service.updateList(currentLists, listsFromServer);
+    let todoLists : TodoList[] = service.update(currentLists, listsFromServer);
 
     //then
     expect(todoLists).toEqual([todoList('a'), todoList('b'), todoList('c')]);
@@ -44,7 +44,7 @@ describe('ArrayUpdaterService', () => {
     let listsFromServer : TodoList[] = [todoList('c'), todoList('a')];
 
     //when
-    let todoLists : TodoList[] = service.updateList(currentLists, listsFromServer);
+    let todoLists : TodoList[] = service.update(currentLists, listsFromServer);
 
     //then
     expect(todoLists).toEqual([todoList('a'), todoList('c')]);

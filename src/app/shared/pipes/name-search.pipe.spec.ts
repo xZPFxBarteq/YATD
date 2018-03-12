@@ -1,10 +1,10 @@
-import { TodoListNameSearchPipe } from './todo-list-name-search.pipe';
-import {TodoList} from "../classes/todo-list";
-import {Todo} from "../../todo/classes/todo";
+import { NameSearchPipe } from './name-search.pipe';
+import {TodoList} from "../../todo-page/components/todo-list/classes/todo-list";
+import {Todo} from "../../todo-page/components/todo/classes/todo";
 
-describe('TodoListNameSearchPipe', () => {
+describe('NameSearchPipe', () => {
 
-  const pipe = new TodoListNameSearchPipe();
+  const pipe = new NameSearchPipe();
 
   it('create an instance', () => {
     expect(pipe).toBeTruthy();

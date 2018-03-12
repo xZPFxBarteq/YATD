@@ -20,8 +20,8 @@ export class TodoRepositoryService {
     return this.http.post<Todo>(this.apiUrl, {'name' : name, 'is_complete' : false, 'todo_list' : todoListId});
   }
 
-  public updateTodo(id : string, isComplete : boolean) : Observable<Todo> {
-    return this.http.put<Todo>(`${this.apiUrl}${id}/`, {'is_complete' : isComplete});
+  public updateTodo(todo : Todo) : Observable<Todo> {
+    return this.http.put<Todo>(`${this.apiUrl}${todo.id}/`, todo);
   }
 
   public removeTodo(id : string) : Observable<void> {

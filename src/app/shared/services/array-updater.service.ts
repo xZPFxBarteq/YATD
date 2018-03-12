@@ -7,9 +7,9 @@ export class ArrayUpdaterService {
   constructor() {
   }
 
-  public updateList<T>(currentLists : T[], updatedLists : T[]) : T[] {
-    let intersection : T[] = _.intersectionWith(currentLists, updatedLists, _.isEqual);
-    let difference : T[] = _.differenceWith(updatedLists, currentLists, _.isEqual);
+  public update<T>(current : T[], updated : T[]) : T[] {
+    let intersection : T[] = _.intersectionWith(current, updated, _.isEqual);
+    let difference : T[] = _.differenceWith(updated, current, _.isEqual);
 
     return intersection.concat(difference);
   }

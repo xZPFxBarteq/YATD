@@ -1,0 +1,7 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.completed {
+  text-decoration: line-through;
+}

@@ -3,12 +3,16 @@
 <search-field #search></search-field>
 <mat-divider></mat-divider>
 <mat-list class="todo">
-  <mat-list-item *ngFor="let todo of todos | todoListNameSearch:search.searchedValue">
-    <editable-name-item [id]="todo.id"
+  <mat-list-item *ngFor="let todo of todos | nameSearch:search.searchedValue">
+    <editable-name-item [ngClass]="{'completed' : todo.is_complete}"
+                        [id]="todo.id"
                         [name]="todo.name"
                         (onRemove)="removeTodo(todo.id)"
-                        (onNameUpdate)="updateTodoName($event)"
-                        #nameHeader></editable-name-item>
+                        (onNameUpdate)="updateTodoName($event)"></editable-name-item>
+    <span class="spacer"></span>
+    <mat-checkbox [(ngModel)]="todo.is_complete"
+                  (change)="updateTodo(todo)"
+    ></mat-checkbox>
     <mat-divider></mat-divider>
   </mat-list-item>
- </mat-list>
+</mat-list>
