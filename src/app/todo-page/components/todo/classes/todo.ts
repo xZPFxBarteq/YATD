@@ -1,4 +1,6 @@
-export class Todo {
+import {Item} from "../../../../shared/classes/item";
+
+export class Todo implements Item {
 
   id : string;
   name : string;

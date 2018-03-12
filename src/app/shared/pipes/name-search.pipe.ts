@@ -1,15 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import {TodoList} from "../../todo-page/components/todo-list/classes/todo-list";
+import {Pipe, PipeTransform} from '@angular/core';
 import * as _ from "lodash";
-import {Todo} from "../../todo-page/components/todo/classes/todo";
+import {Item} from "../classes/item";
 
 @Pipe({
-  name: 'nameSearch'
+  name : 'nameSearch'
 })
 export class NameSearchPipe implements PipeTransform {
 
-  transform(filteredArray: TodoList[] | Todo[], searchName: string): any {
-    return _.filter(filteredArray, (element : TodoList | Todo) => _.startsWith(_.toLower(element.name), _.toLower(searchName)));
+  transform<T extends Item>(filteredArray : T[], searchName : string) : T[] {
+    return _.filter(filteredArray, (element : T) => _.startsWith(_.toLower(element.name), _.toLower(searchName)));
   }
 
 }
