@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TodoList} from "./classes/todo-list";
 import {NameChangeEvent} from "../../../shared/classes/name-change-event";
-import {TodoListArrayUpdaterService} from "./services/todo-list-array-updater.service";
+import {ArrayUpdaterService} from "../../../shared/services/array-updater.service";
 import {TodoListRepositoryService} from "./services/todo-list-repository.service";
 import * as _ from "lodash";
 
@@ -16,7 +16,7 @@ export class TodoListComponent implements OnInit {
   public selectedList : TodoList = null;
 
   constructor(private todoListRepository : TodoListRepositoryService,
-              private listsUpdater : TodoListArrayUpdaterService) {
+              private listsUpdater : ArrayUpdaterService) {
   }
 
   ngOnInit() {

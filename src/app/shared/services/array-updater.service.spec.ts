@@ -1,20 +1,20 @@
 import {TestBed, inject} from '@angular/core/testing';
 
-import {TodoListArrayUpdaterService} from './todo-list-array-updater.service';
-import {TodoList} from "../classes/todo-list";
+import {ArrayUpdaterService} from './array-updater.service';
+import {TodoList} from "../../todo-page/components/todo-list/classes/todo-list";
 
-describe('TodoListArrayUpdaterService', () => {
+describe('ArrayUpdaterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers : [TodoListArrayUpdaterService]
+      providers : [ArrayUpdaterService]
     });
   });
 
-  it('should be created', inject([TodoListArrayUpdaterService], (service : TodoListArrayUpdaterService) => {
+  it('should be created', inject([ArrayUpdaterService], (service : ArrayUpdaterService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should place new list at end', inject([TodoListArrayUpdaterService], (service : TodoListArrayUpdaterService) => {
+  it('should place new list at end', inject([ArrayUpdaterService], (service : ArrayUpdaterService) => {
     //given
     let currentLists : TodoList[] = [todoList('a'), todoList('b')];
     let listsFromServer : TodoList[] = [todoList('c'), todoList('a'), todoList('b')];
@@ -26,7 +26,7 @@ describe('TodoListArrayUpdaterService', () => {
     expect(todoLists).toEqual([todoList('a'), todoList('b'), todoList('c')]);
   }));
 
-  it('should maintain order of current list', inject([TodoListArrayUpdaterService], (service : TodoListArrayUpdaterService) => {
+  it('should maintain order of current list', inject([ArrayUpdaterService], (service : ArrayUpdaterService) => {
     //given
     let currentLists : TodoList[] = [todoList('a'), todoList('b'), todoList('c')];
     let listsFromServer : TodoList[] = [todoList('c'), todoList('a'), todoList('b')];
@@ -38,7 +38,7 @@ describe('TodoListArrayUpdaterService', () => {
     expect(todoLists).toEqual([todoList('a'), todoList('b'), todoList('c')]);
   }));
 
-  it('should maintain order of current list when one list was removed on server', inject([TodoListArrayUpdaterService], (service : TodoListArrayUpdaterService) => {
+  it('should maintain order of current list when one list was removed on server', inject([ArrayUpdaterService], (service : ArrayUpdaterService) => {
     //given
     let currentLists : TodoList[] = [todoList('a'), todoList('b'), todoList('c')];
     let listsFromServer : TodoList[] = [todoList('c'), todoList('a')];

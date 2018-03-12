@@ -2,7 +2,7 @@ import {async, TestBed} from '@angular/core/testing';
 
 import {TodoListComponent} from './todo-list.component';
 import {TodoListRepositoryService} from "./services/todo-list-repository.service";
-import {TodoListArrayUpdaterService} from "./services/todo-list-array-updater.service";
+import {ArrayUpdaterService} from "../../../shared/services/array-updater.service";
 import {ToDoListRepositoryMock} from "./mocks/to-do-list-repository-mock";
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "../../../modules/material.module";
@@ -21,7 +21,7 @@ describe('TodoListComponent', () => {
       imports : [MaterialModule, FormsModule],
       providers : [
         {provide : TodoListRepositoryService, useClass : ToDoListRepositoryMock},
-        {provide : TodoListArrayUpdaterService, useClass : TodoListArrayUpdaterService}]
+        {provide : ArrayUpdaterService, useClass : ArrayUpdaterService}]
     })
       .compileComponents();
   }));

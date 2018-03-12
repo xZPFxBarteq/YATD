@@ -17,7 +17,7 @@ import {EditableNameItemComponent} from "./shared/components/editable-name-item/
 import {TodoListNameSearchPipe} from "./todo-page/components/todo-list/pipes/todo-list-name-search.pipe";
 import {SearchFieldComponent} from "./shared/components/search-field/search-field.component";
 import {TodoListRepositoryService} from "./todo-page/components/todo-list/services/todo-list-repository.service";
-import {TodoListArrayUpdaterService} from "./todo-page/components/todo-list/services/todo-list-array-updater.service";
+import {ArrayUpdaterService} from "./shared/services/array-updater.service";
 import {TodoComponent} from './todo-page/components/todo/todo.component';
 import {TodoRepositoryService} from "./todo-page/components/todo/services/todo-repository.service";
 
@@ -49,7 +49,7 @@ let authorizationConfig = new AuthServiceConfig([
     MaterialModule,
     SocialLoginModule.initialize(authorizationConfig)
   ],
-  providers : [TodoListRepositoryService, TodoRepositoryService, TodoListArrayUpdaterService],
+  providers : [TodoListRepositoryService, TodoRepositoryService, ArrayUpdaterService],
   bootstrap : [AppComponent]
 })
 export class AppModule {
