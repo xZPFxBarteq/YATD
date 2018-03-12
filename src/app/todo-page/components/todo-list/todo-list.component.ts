@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TodoList} from "./classes/todo-list";
 import {NameChangeEvent} from "../../../shared/classes/name-change-event";
 import {TodoListArrayUpdaterService} from "./services/todo-list-array-updater.service";
 import {TodoListRepositoryService} from "./services/todo-list-repository.service";
+import * as _ from "lodash";
 
 @Component({
   selector : 'todo-lists',
@@ -12,7 +13,7 @@ import {TodoListRepositoryService} from "./services/todo-list-repository.service
 export class TodoListComponent implements OnInit {
 
   public todoLists : TodoList[] = [];
-  public selectedListId : string = '';
+  public selectedList : TodoList = null;
 
   constructor(private todoListRepository : TodoListRepositoryService,
               private listsUpdater : TodoListArrayUpdaterService) {
@@ -35,7 +36,19 @@ export class TodoListComponent implements OnInit {
   }
 
   public selectList(listId : string) : void {
-    this.selectedListId = listId;
+    this.selectedList = _.find(this.todoLists, ['id', listId]);
+  }
+
+  public isSelected(todoList : TodoList) : boolean {
+    return this.selectedList === todoList;
+  }
+
+  public selectedListName() : string {
+    return this.selectedList != null ? this.selectedList.name : 'No list selected';
+  }
+
+  public selectedListId() : string {
+    return this.selectedList != null ? this.selectedList.id : null;
   }
 
   private refreshLists() : void {
@@ -43,5 +56,7 @@ export class TodoListComponent implements OnInit {
       this.todoLists = this.listsUpdater.updateList(this.todoLists, todoLists);
     });
   }
+
+
 
 }

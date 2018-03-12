@@ -1,17 +1,3 @@
-.lists-page {
-  display: flex;
-}
-
-.lists {
-  flex: 25%;
-  min-width: 450px;
-}
-
-.list-content {
-  flex: 75%;
-  width: 100%;
-}
-
-.lists-page mat-card {
-  height: calc(100vh - 130px);
+.yatd-page {
+  height: calc(100vh - 80px);
 }

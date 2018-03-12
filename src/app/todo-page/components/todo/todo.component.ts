@@ -24,6 +24,10 @@ export class TodoComponent implements OnInit {
     this.refreshTodos();
   }
 
+  public addNewTodo(name : string) : void {
+    this.todoRepository.addNewTodo(name, this.todoListId).subscribe(() => this.refreshTodos());
+  }
+
   public removeTodo(id : string) {
     this.todoRepository.removeTodo(id).subscribe(() => this.refreshTodos());
   }

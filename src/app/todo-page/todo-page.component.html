@@ -1,14 +1,9 @@
-<div class="lists-page">
-  <mat-card>
-    <mat-card-content>
-      <div class="lists">
-        <todo-lists #lists></todo-lists>
-      </div>
-    </mat-card-content>
-  </mat-card>
-  <mat-card class="list-content">
-    <mat-card-content>
-      <todo [todoListId]="lists.selectedListId"></todo>
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-drawer-container class="yatd-page">
+  <mat-drawer mode="side" opened="true">
+    <todo-lists #lists></todo-lists>
+  </mat-drawer>
+  <mat-drawer-content>
+    <todo [todoListId]="lists.selectedListId()"
+          *ngIf="lists.selectedList != null"></todo>
+  </mat-drawer-content>
+</mat-drawer-container>
