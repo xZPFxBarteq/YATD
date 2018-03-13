@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService, GoogleLoginProvider} from "angularx-social-login";
 import {Router} from "@angular/router";
+import {ServerService} from "../shared/services/server.service";
 
 @Component({
   selector : 'login',
@@ -11,11 +12,13 @@ export class LoginComponent implements OnInit {
 
   protected serverUrl : string = 'https://todos.venturedevs.net/'
 
-  constructor(private authService : AuthService,
+  constructor(private server : ServerService,
+              private authService : AuthService,
               private router : Router) {
   }
 
   ngOnInit() {
+    this.changeServerUrl();
     this.authService.authState.subscribe(user => {
       if (user != null) {
         this.router.navigateByUrl('/lists');
@@ -23,11 +26,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  loginWithGoogle() : void {
+  public changeServerUrl() : void {
+    this.server.setServerUrl(this.serverUrl);
+  }
+
+  public loginWithGoogle() : void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  loginAnonymously() : void {
+  public loginAnonymously() : void {
     this.router.navigateByUrl('/lists');
   }
 

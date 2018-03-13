@@ -20,6 +20,8 @@ import {TodoListRepositoryService} from "./todo-page/components/todo-list/servic
 import {ArrayUpdaterService} from "./shared/services/array-updater.service";
 import {TodoComponent} from './todo-page/components/todo/todo.component';
 import {TodoRepositoryService} from "./todo-page/components/todo/services/todo-repository.service";
+import {CoreModule} from "./modules/core.module";
+import {AngularWebStorageModule} from "angular-web-storage";
 
 let authorizationConfig = new AuthServiceConfig([
   {
@@ -42,6 +44,8 @@ let authorizationConfig = new AuthServiceConfig([
     TodoComponent
   ],
   imports : [
+    CoreModule,
+    AngularWebStorageModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,

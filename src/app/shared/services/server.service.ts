@@ -1,16 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {SessionStorageService} from "angular-web-storage";
 
 @Injectable()
 export class ServerService {
 
-  serverUrl : string;
+  private serverUrl : string;
 
-  constructor() {
+  constructor(private sessionStorage : SessionStorageService) {
+    this.serverUrl = this.sessionStorage.get('serverUrl');
   }
 
-  public setServerUrl(serverUrl : string) : boolean {
+  public setServerUrl(serverUrl : string) : void {
+    this.sessionStorage.set('serverUrl', serverUrl);
+    this.serverUrl = serverUrl;
+  }
 
-    return true;
+  public getUrl(endpoint? : string) : string {
+    return this.serverUrl + endpoint;
   }
 
 }
