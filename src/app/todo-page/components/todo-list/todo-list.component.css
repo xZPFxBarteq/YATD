@@ -1,5 +1,6 @@
 .to-do-lists editable-name-item {
   width: 100%;
+  max-width: 420px;
   cursor: pointer;
 }
 
