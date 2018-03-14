@@ -3,7 +3,6 @@ import {TodoList} from "./classes/todo-list";
 import {NameChangeEvent} from "../../../shared/classes/name-change-event";
 import {ArrayUpdaterService} from "../../../shared/services/array-updater.service";
 import {TodoListsRepositoryService} from "./services/todo-lists-repository.service";
-import * as _ from "lodash";
 
 @Component({
   selector : 'todo-lists',
@@ -13,7 +12,7 @@ import * as _ from "lodash";
 export class TodoListsComponent implements OnInit {
 
   public todoLists : TodoList[] = [];
-  public selectedList : TodoList = null;
+  public selectedListId : string = null;
 
   constructor(private todoListRepository : TodoListsRepositoryService,
               private arrayUpdater : ArrayUpdaterService) {
@@ -28,28 +27,29 @@ export class TodoListsComponent implements OnInit {
   }
 
   public updateListName(nameChangeEvent : NameChangeEvent) : void {
-    this.todoListRepository.updateListName(nameChangeEvent.id, nameChangeEvent.name).subscribe(() => this.refreshLists());
+    this.todoListRepository.updateListName(nameChangeEvent.id, nameChangeEvent.name)
+        .subscribe(() => this.refreshLists());
   }
 
   public removeList(id : string) : void {
     this.todoListRepository.removeList(id).subscribe(() => {
-      if(this.selectedList.id == id) {
-        this.selectedList = null;
+      if (this.selectedListId == id) {
+        this.selectedListId = null;
       }
       this.refreshLists()
     });
   }
 
   public selectList(listId : string) : void {
-    this.selectedList = _.find(this.todoLists, ['id', listId]);
+    this.selectedListId = listId;
   }
 
   public isSelected(todoList : TodoList) : boolean {
-    return this.selectedList === todoList;
+    return this.selectedListId === todoList.id;
   }
 
-  public selectedListId() : string {
-    return this.selectedList != null ? this.selectedList.id : null;
+  public anyListSelected() : boolean {
+    return this.selectedListId != null;
   }
 
   private refreshLists() : void {
@@ -57,7 +57,6 @@ export class TodoListsComponent implements OnInit {
       this.todoLists = this.arrayUpdater.update(this.todoLists, todoLists);
     });
   }
-
 
 
 }

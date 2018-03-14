@@ -3,7 +3,7 @@
     <todo-lists #lists></todo-lists>
   </mat-drawer>
   <mat-drawer-content>
-    <todo-list [todoListId]="lists.selectedListId()"
-          *ngIf="lists.selectedList != null"></todo-list>
+    <todo-list [todoListId]="lists.selectedListId"
+               *ngIf="lists.anyListSelected()"></todo-list>
   </mat-drawer-content>
 </mat-drawer-container>
