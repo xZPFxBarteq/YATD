@@ -22,6 +22,9 @@ import {TodoComponent} from './todo-page/components/todo/todo.component';
 import {TodoRepositoryService} from "./todo-page/components/todo/services/todo-repository.service";
 import {CoreModule} from "./modules/core.module";
 import {AngularWebStorageModule} from "angular-web-storage";
+import {ErrorHandlerService} from "./shared/services/error-handler.service";
+import {ErrorDialogComponent} from './shared/components/error-dialog/error-dialog.component';
+import {RepositoryService} from "./shared/services/repository.service";
 
 let authorizationConfig = new AuthServiceConfig([
   {
@@ -41,7 +44,8 @@ let authorizationConfig = new AuthServiceConfig([
     NewItemComponent,
     NameSearchPipe,
     SearchFieldComponent,
-    TodoComponent
+    TodoComponent,
+    ErrorDialogComponent
   ],
   imports : [
     CoreModule,
@@ -53,7 +57,13 @@ let authorizationConfig = new AuthServiceConfig([
     MaterialModule,
     SocialLoginModule.initialize(authorizationConfig)
   ],
-  providers : [TodoListRepositoryService, TodoRepositoryService, ArrayUpdaterService],
+  entryComponents : [ErrorDialogComponent],
+  providers : [
+    RepositoryService,
+    TodoListRepositoryService,
+    TodoRepositoryService,
+    ArrayUpdaterService,
+    ErrorHandlerService],
   bootstrap : [AppComponent]
 })
 export class AppModule {
