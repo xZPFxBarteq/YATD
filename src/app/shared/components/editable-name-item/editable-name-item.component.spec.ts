@@ -2,11 +2,9 @@ import {async, TestBed} from '@angular/core/testing';
 
 import {EditableNameItemComponent} from './editable-name-item.component';
 import {FormsModule} from "@angular/forms";
-import {TodoListsRepositoryMock} from "../../../todo-page/components/todo-lists/mocks/todo-lists-repository-mock";
 import {MaterialModule} from "../../../modules/material.module";
-import {TodoListsRepositoryService} from "../../../todo-page/components/todo-lists/services/todo-lists-repository.service";
-import {TodoList} from "../../../todo-page/components/todo-lists/classes/todo-list";
 import {TodoFixture} from "../../classes/todo-fixture";
+import {NameChangeEvent} from "../../classes/name-change-event";
 
 describe('EditableNameItemComponent', () => {
   let component : EditableNameItemComponent;
@@ -15,12 +13,9 @@ describe('EditableNameItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations : [EditableNameItemComponent],
-      imports : [MaterialModule, FormsModule],
-      providers : [
-        {provide : TodoListsRepositoryService, useClass : TodoListsRepositoryMock}
-      ]
+      imports : [MaterialModule, FormsModule]
     })
-      .compileComponents();
+           .compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,22 +27,42 @@ describe('EditableNameItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display list name if not in edit mode', () => {
+  it('should display name if not in edit mode', () => {
     //when
-    component.todoList = fixture.todoList('existingTestList');
+    component.name = 'test';
     fixture.detectChanges();
 
     //then
-    expect(fixture.cssQuery('span').textContent).toEqual('existingTestList');
+    expect(fixture.cssQuery('.name-label').textContent).toEqual('test');
   });
 
-  it('should display input with list name as value in edit mode', () => {
+  it('should display input with name as value in edit mode', () => {
     //when
     enterEditMode();
 
     //then
     fixture.whenStable().then(() => {
-      expect(fixture.cssQuery('.name-edit mat-form-field input').value).toEqual('existingTestList');
+      expect(fixture.cssQuery('.name-edit mat-form-field input').value).toEqual('test');
+    });
+  });
+
+  it('should display remove button', () => {
+    //when
+    fixture.detectChanges();
+
+    //then
+    fixture.whenStable().then(() => {
+      expect(fixture.cssQuery('.editable-name-item button:nth-child(1)')).not.toBeNull();
+    });
+  });
+
+  it('should display edit button', () => {
+    //when
+    fixture.detectChanges();
+
+    //then
+    fixture.whenStable().then(() => {
+      expect(fixture.cssQuery('.editable-name-item button:nth-child(2)')).not.toBeNull();
     });
   });
 
@@ -71,56 +86,91 @@ describe('EditableNameItemComponent', () => {
     });
   });
 
-  it('should update list name', () => {
+  it('should update name', () => {
     //when
     enterEditMode();
 
     //then
     fixture.whenStable().then(() => {
-      fixture.setInputValue('.name-edit mat-form-field input', 'changedListName');
+      fixture.setInputValue('.name-edit mat-form-field input', 'changedTest');
       fixture.clickButton('.name-edit button:nth-child(2)');
-      expect(fixture.cssQuery('span').textContent).toEqual('changedListName');
+      expect(fixture.cssQuery('.name-label').textContent).toEqual('changedTest');
     });
   });
 
-  it('should revert list name when cancel is clicked', () => {
+  it('should revert name when cancel is clicked', () => {
     //when
     enterEditMode();
 
     //then
     fixture.whenStable().then(() => {
-      fixture.setInputValue('.name-edit mat-form-field input', 'changedListName');
+      fixture.setInputValue('.name-edit mat-form-field input', 'changedTest');
       fixture.clickButton('.name-edit button:nth-child(3)');
-      expect(fixture.cssQuery('span').textContent).toEqual('existingTestList');
+      expect(fixture.cssQuery('.name-label').textContent).toEqual('test');
     });
   });
 
-  it('should emit event after name update', () => {
+  it('should emit event when name update has been accepted', () => {
+    //given
+    let id : string;
+    let updatedName : string;
+    component.onNameUpdate.subscribe((event : NameChangeEvent) => {
+      id = event.id;
+      updatedName = event.name;
+    });
+
     //when
-    spyOn(component.onNameUpdate, 'emit');
     enterEditMode();
 
     //then
     fixture.whenStable().then(() => {
-      fixture.setInputValue('.name-edit mat-form-field input', 'changedListName');
+      fixture.setInputValue('.name-edit mat-form-field input', 'changedTest');
       fixture.clickButton('.name-edit button:nth-child(2)');
-      expect(component.onNameUpdate.emit).toHaveBeenCalled();
+      expect(id).toEqual('testId');
+      expect(updatedName).toEqual('changedTest');
+    });
+  });
+
+  it('should emit event after item remove', () => {
+    //given
+    let idToRemove : string;
+    component.id = 'testId';
+    component.onRemove.subscribe((id : string) => {
+      idToRemove = id;
+    });
+
+    //when
+    fixture.detectChanges();
+    fixture.clickButton('.editable-name-item button:nth-child(1)');
+    fixture.whenStable().then(() => {
+      expect(idToRemove).toEqual('testId');
     });
   });
 
   it('should emit event after component has been clicked', () => {
-    component.todoList = fixture.todoList('existingTestList');
-    component.onItemClicked.subscribe((clickedList : TodoList) => {
-      expect(clickedList.name).toEqual('existingTestList');
+    //given
+    let clickedItemId : string;
+    component.id = 'testId';
+    component.onItemClicked.subscribe((id : string) => {
+      clickedItemId = id;
     });
+
+    //when
     fixture.detectChanges();
-    fixture.clickElement('span');
+    component.onClick(fixture.cssQuery('.name-label').classList);
+
+    //then
+    fixture.whenStable().then(() => {
+      expect(clickedItemId).toEqual('testId');
+    });
   });
 
   function enterEditMode() : void {
-    component.todoList = fixture.todoList('existingTestList');
-    component.editName();
+    component.id = 'testId';
+    component.name = 'test';
+    fixture.clickButton('.editable-name-item button:nth-child(2)');
     fixture.detectChanges();
   }
 
 });
+

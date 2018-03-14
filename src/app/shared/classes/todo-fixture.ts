@@ -32,7 +32,7 @@ export class TodoFixture<T> {
   }
 
   public clickElement(elementSelector : string) : void {
-    this.fixture.debugElement.query(By.css(elementSelector)).triggerEventHandler('click', null);
+    this.fixture.debugElement.query(By.css(elementSelector)).triggerEventHandler('click', { bubbles : true });
     this.fixture.detectChanges();
   }
 

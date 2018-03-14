@@ -34,7 +34,7 @@ describe('SearchFieldComponent', () => {
     //given
     fixture.setInputValue('.search mat-form-field input', 'test');
     //when
-    fixture.cssQuery('.search button').clickButton();
+    fixture.clickButton('.search button');
     //then
     expect(component.searchedValue).toEqual('');
   });

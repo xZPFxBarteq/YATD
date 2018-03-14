@@ -10,6 +10,7 @@ import {TodoFixture} from "../../../shared/classes/todo-fixture";
 import {SearchFieldComponent} from "../../../shared/components/search-field/search-field.component";
 import {EditableNameItemComponent} from "../../../shared/components/editable-name-item/editable-name-item.component";
 import {NameSearchPipe} from "../../../shared/pipes/name-search.pipe";
+import {NewItemComponent} from "../../../shared/components/new-item/new-item.component";
 
 describe('TodoListsComponent', () => {
   let component : TodoListsComponent;
@@ -17,7 +18,7 @@ describe('TodoListsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations : [TodoListsComponent, SearchFieldComponent, EditableNameItemComponent, NameSearchPipe],
+      declarations : [TodoListsComponent, SearchFieldComponent, EditableNameItemComponent, NewItemComponent, NameSearchPipe],
       imports : [MaterialModule, FormsModule],
       providers : [
         {provide : TodoListsRepositoryService, useClass : TodoListsRepositoryMock},
@@ -41,7 +42,7 @@ describe('TodoListsComponent', () => {
   });
 
   it('should remove list', async(() => {
-    fixture.clickButton('#existingTestList button:nth-of-type(1)');
+    fixture.clickButton('#existingTestList editable-name-item button:nth-of-type(1)');
 
     fixture.whenStable().then(() => {
       let lists : HTMLDivElement = fixture.nativeElement.querySelector('.to-do-lists');
@@ -53,6 +54,14 @@ describe('TodoListsComponent', () => {
     fixture.setInputValue('.search mat-form-field input', 'second');
     expect(fixture.cssQuery('#existingTestList')).toBeNull();
     expect(fixture.cssQuery('#secondTestList')).not.toBeNull();
+  });
+
+  it('should add new list', () => {
+    fixture.setInputValue('.add-new-item mat-form-field input', 'newItem');
+    fixture.clickButton('.add-new-item button');
+    fixture.whenStable().then(() => {
+      expect(fixture.cssQuery('#newItem')).not.toBeNull();
+    });
   });
 
 });

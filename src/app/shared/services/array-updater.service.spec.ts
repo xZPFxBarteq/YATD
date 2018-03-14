@@ -52,6 +52,7 @@ describe('ArrayUpdaterService', () => {
 
   function todoList(name : string) : TodoList {
     let todoList : TodoList = new TodoList();
+    todoList.id = name;
     todoList.name = name;
     return todoList;
   }
