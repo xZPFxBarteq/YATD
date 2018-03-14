@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {RepositoryService} from "../../../../shared/services/repository.service";
 
 @Injectable()
-export class TodoListRepositoryService extends RepositoryService {
+export class TodoListsRepositoryService extends RepositoryService {
 
   private endpoint : string = 'api/todolists/';
 

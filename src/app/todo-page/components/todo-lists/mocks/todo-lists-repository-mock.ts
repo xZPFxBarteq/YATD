@@ -3,7 +3,7 @@ import {TodoList} from "../classes/todo-list";
 import 'rxjs/add/observable/of';
 import * as _ from "lodash";
 
-export class ToDoListRepositoryMock {
+export class TodoListsRepositoryMock {
 
   private lists : TodoList[] = [
     this.newToDoList('existingTestList'),

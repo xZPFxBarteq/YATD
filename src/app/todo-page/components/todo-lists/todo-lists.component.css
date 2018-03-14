@@ -1,0 +1,12 @@
+.to-do-lists editable-name-item {
+  width: 100%;
+  max-width: 420px;
+  cursor: pointer;
+}
+
+.selected-list {
+  background-color: rgba(0, 0, 0, .12);
+}
+
+
+

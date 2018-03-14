@@ -1,63 +1,54 @@
-import {Component, OnInit} from '@angular/core';
-import {TodoList} from "./classes/todo-list";
+import {Component, Input, OnInit} from '@angular/core';
+import {TodoRepositoryService} from "./services/todo-repository.service";
+import {Todo} from "./classes/todo";
 import {NameChangeEvent} from "../../../shared/classes/name-change-event";
-import {ArrayUpdaterService} from "../../../shared/services/array-updater.service";
-import {TodoListRepositoryService} from "./services/todo-list-repository.service";
 import * as _ from "lodash";
+import {ArrayUpdaterService} from "../../../shared/services/array-updater.service";
 
 @Component({
-  selector : 'todo-lists',
+  selector : 'todo-list',
   templateUrl : './todo-list.component.html',
   styleUrls : ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
 
-  public todoLists : TodoList[] = [];
-  public selectedList : TodoList = null;
+  @Input() public todoListId : string;
+  protected todos : Todo[];
 
-  constructor(private todoListRepository : TodoListRepositoryService,
+  constructor(private todoRepository : TodoRepositoryService,
               private arrayUpdater : ArrayUpdaterService) {
   }
 
   ngOnInit() {
-    this.refreshLists();
+    this.refreshTodos();
   }
 
-  public addNewList(name : string) : void {
-    this.todoListRepository.addNewList(name).subscribe(() => this.refreshLists());
+  ngOnChanges() {
+    this.refreshTodos();
   }
 
-  public updateListName(nameChangeEvent : NameChangeEvent) : void {
-    this.todoListRepository.updateListName(nameChangeEvent.id, nameChangeEvent.name).subscribe(() => this.refreshLists());
+  public addNewTodo(name : string) : void {
+    this.todoRepository.addNewTodo(name, this.todoListId).subscribe(() => this.refreshTodos());
   }
 
-  public removeList(id : string) : void {
-    this.todoListRepository.removeList(id).subscribe(() => {
-      if(this.selectedList.id == id) {
-        this.selectedList = null;
-      }
-      this.refreshLists()
+  public removeTodo(id : string) : void {
+    this.todoRepository.removeTodo(id).subscribe(() => this.refreshTodos());
+  }
+
+  public updateTodoName(nameChangeEvent : NameChangeEvent) : void {
+    let todoToUpdate : Todo = _.find(this.todos, ['id', nameChangeEvent.id]);
+    todoToUpdate.name = nameChangeEvent.name;
+    this.updateTodo(todoToUpdate);
+  }
+
+  public updateTodo(todo : Todo) : void {
+    this.todoRepository.updateTodo(todo).subscribe(() => this.refreshTodos());
+  }
+
+  private refreshTodos() : void {
+    this.todoRepository.getTodos(this.todoListId).subscribe(todos => {
+      this.todos = this.arrayUpdater.update(this.todos, todos);
     });
   }
-
-  public selectList(listId : string) : void {
-    this.selectedList = _.find(this.todoLists, ['id', listId]);
-  }
-
-  public isSelected(todoList : TodoList) : boolean {
-    return this.selectedList === todoList;
-  }
-
-  public selectedListId() : string {
-    return this.selectedList != null ? this.selectedList.id : null;
-  }
-
-  private refreshLists() : void {
-    this.todoListRepository.getAllLists().subscribe(todoLists => {
-      this.todoLists = this.arrayUpdater.update(this.todoLists, todoLists);
-    });
-  }
-
-
 
 }

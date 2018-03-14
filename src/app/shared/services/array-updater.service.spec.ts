@@ -1,7 +1,7 @@
 import {TestBed, inject} from '@angular/core/testing';
 
 import {ArrayUpdaterService} from './array-updater.service';
-import {TodoList} from "../../todo-page/components/todo-list/classes/todo-list";
+import {TodoList} from "../../todo-page/components/todo-lists/classes/todo-list";
 
 describe('ArrayUpdaterService', () => {
   beforeEach(() => {

@@ -1,12 +1,11 @@
-.to-do-lists editable-name-item {
-  width: 100%;
-  max-width: 420px;
-  cursor: pointer;
+mat-list mat-list-item editable-name-item {
+  width: 90%;
 }
 
-.selected-list {
-  background-color: rgba(0, 0, 0, .12);
+.spacer {
+  flex: 1 1 auto;
 }
 
-
-
+.completed {
+  text-decoration: line-through;
+}

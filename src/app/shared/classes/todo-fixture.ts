@@ -1,6 +1,6 @@
 import {ComponentFixture} from "@angular/core/testing";
 import {By} from "@angular/platform-browser";
-import {TodoList} from "../../todo-page/components/todo-list/classes/todo-list";
+import {TodoList} from "../../todo-page/components/todo-lists/classes/todo-list";
 import {ChangeDetectorRef, DebugElement, ElementRef} from "@angular/core";
 
 export class TodoFixture<T> {

@@ -12,14 +12,14 @@ import {MaterialModule} from './modules/material.module';
 import {UserBarComponent} from './user-bar/user-bar.component';
 import {TodoPageComponent} from './todo-page/todo-page.component';
 import {NewItemComponent} from './shared/components/new-item/new-item.component';
-import {TodoListComponent} from "./todo-page/components/todo-list/todo-list.component";
+import {TodoListsComponent} from "./todo-page/components/todo-lists/todo-lists.component";
 import {EditableNameItemComponent} from "./shared/components/editable-name-item/editable-name-item.component";
 import {NameSearchPipe} from "./shared/pipes/name-search.pipe";
 import {SearchFieldComponent} from "./shared/components/search-field/search-field.component";
-import {TodoListRepositoryService} from "./todo-page/components/todo-list/services/todo-list-repository.service";
+import {TodoListsRepositoryService} from "./todo-page/components/todo-lists/services/todo-lists-repository.service";
 import {ArrayUpdaterService} from "./shared/services/array-updater.service";
-import {TodoComponent} from './todo-page/components/todo/todo.component';
-import {TodoRepositoryService} from "./todo-page/components/todo/services/todo-repository.service";
+import {TodoListComponent} from './todo-page/components/todo-list/todo-list.component';
+import {TodoRepositoryService} from "./todo-page/components/todo-list/services/todo-repository.service";
 import {CoreModule} from "./modules/core.module";
 import {AngularWebStorageModule} from "angular-web-storage";
 import {ErrorHandlerService} from "./shared/services/error-handler.service";
@@ -37,14 +37,14 @@ let authorizationConfig = new AuthServiceConfig([
   declarations : [
     AppComponent,
     LoginComponent,
-    TodoListComponent,
+    TodoListsComponent,
     UserBarComponent,
     EditableNameItemComponent,
     TodoPageComponent,
     NewItemComponent,
     NameSearchPipe,
     SearchFieldComponent,
-    TodoComponent,
+    TodoListComponent,
     ErrorDialogComponent
   ],
   imports : [
@@ -60,7 +60,7 @@ let authorizationConfig = new AuthServiceConfig([
   entryComponents : [ErrorDialogComponent],
   providers : [
     RepositoryService,
-    TodoListRepositoryService,
+    TodoListsRepositoryService,
     TodoRepositoryService,
     ArrayUpdaterService,
     ErrorHandlerService],

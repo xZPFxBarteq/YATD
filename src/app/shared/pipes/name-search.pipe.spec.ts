@@ -1,6 +1,6 @@
 import { NameSearchPipe } from './name-search.pipe';
-import {TodoList} from "../../todo-page/components/todo-list/classes/todo-list";
-import {Todo} from "../../todo-page/components/todo/classes/todo";
+import {TodoList} from "../../todo-page/components/todo-lists/classes/todo-list";
+import {Todo} from "../../todo-page/components/todo-list/classes/todo";
 
 describe('NameSearchPipe', () => {
 

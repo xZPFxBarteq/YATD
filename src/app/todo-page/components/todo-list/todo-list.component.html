@@ -1,17 +1,18 @@
-<new-item (onNewItemAdded)="addNewList($event)"></new-item>
+<new-item (onNewItemAdded)="addNewTodo($event)"></new-item>
 <mat-divider></mat-divider>
 <search-field #search></search-field>
 <mat-divider></mat-divider>
-<mat-list class="to-do-lists">
-  <mat-list-item *ngFor="let todoList of todoLists | nameSearch:search.searchedValue"
-                 [id]="todoList.id"
-                 [ngClass]="{'selected-list' : isSelected(todoList)}">
-    <editable-name-item [id]="todoList.id"
-                        [name]="todoList.name"
-                        (onRemove)="removeList($event)"
-                        (onNameUpdate)="updateListName($event)"
-                        (onItemClicked)="selectList($event)"></editable-name-item>
+<mat-list class="todo">
+  <mat-list-item *ngFor="let todo of todos | nameSearch:search.searchedValue">
+    <editable-name-item [ngClass]="{'completed' : todo.is_complete}"
+                        [id]="todo.id"
+                        [name]="todo.name"
+                        (onRemove)="removeTodo(todo.id)"
+                        (onNameUpdate)="updateTodoName($event)"></editable-name-item>
+    <span class="spacer"></span>
+    <mat-checkbox [(ngModel)]="todo.is_complete"
+                  (change)="updateTodo(todo)"
+    ></mat-checkbox>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
-

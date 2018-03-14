@@ -2,10 +2,10 @@ import {async, TestBed} from '@angular/core/testing';
 
 import {EditableNameItemComponent} from './editable-name-item.component';
 import {FormsModule} from "@angular/forms";
-import {ToDoListRepositoryMock} from "../../../todo-page/components/todo-list/mocks/to-do-list-repository-mock";
+import {TodoListsRepositoryMock} from "../../../todo-page/components/todo-lists/mocks/todo-lists-repository-mock";
 import {MaterialModule} from "../../../modules/material.module";
-import {TodoListRepositoryService} from "../../../todo-page/components/todo-list/services/todo-list-repository.service";
-import {TodoList} from "../../../todo-page/components/todo-list/classes/todo-list";
+import {TodoListsRepositoryService} from "../../../todo-page/components/todo-lists/services/todo-lists-repository.service";
+import {TodoList} from "../../../todo-page/components/todo-lists/classes/todo-list";
 import {TodoFixture} from "../../classes/todo-fixture";
 
 describe('EditableNameItemComponent', () => {
@@ -17,7 +17,7 @@ describe('EditableNameItemComponent', () => {
       declarations : [EditableNameItemComponent],
       imports : [MaterialModule, FormsModule],
       providers : [
-        {provide : TodoListRepositoryService, useClass : ToDoListRepositoryMock}
+        {provide : TodoListsRepositoryService, useClass : TodoListsRepositoryMock}
       ]
     })
       .compileComponents();

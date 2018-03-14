@@ -4,8 +4,8 @@ import {NewItemComponent} from './new-item.component';
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "../../../modules/material.module";
 import {TodoFixture} from "../../classes/todo-fixture";
-import {ToDoListRepositoryMock} from "../../../todo-page/components/todo-list/mocks/to-do-list-repository-mock";
-import {TodoListRepositoryService} from "../../../todo-page/components/todo-list/services/todo-list-repository.service";
+import {TodoListsRepositoryMock} from "../../../todo-page/components/todo-lists/mocks/todo-lists-repository-mock";
+import {TodoListsRepositoryService} from "../../../todo-page/components/todo-lists/services/todo-lists-repository.service";
 
 describe('NewItemComponent', () => {
   let component : NewItemComponent;
@@ -16,7 +16,7 @@ describe('NewItemComponent', () => {
       declarations : [NewItemComponent],
       imports : [MaterialModule, FormsModule],
       providers : [
-        {provide : TodoListRepositoryService, useClass : ToDoListRepositoryMock}
+        {provide : TodoListsRepositoryService, useClass : TodoListsRepositoryMock}
       ]
     })
       .compileComponents();
