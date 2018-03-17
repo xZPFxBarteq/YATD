@@ -30,22 +30,6 @@ describe('UserBarComponent', () => {
       .compileComponents();
   }));
 
-  function setupLoggedUser() {
-    spyOnProperty(mockAuthService, 'authState', 'get').and.returnValue(Observable.of({name : 'testname'}));
-    createComponent();
-  }
-
-  function setupAnonymousUser() {
-    spyOnProperty(mockAuthService, 'authState', 'get').and.returnValue(Observable.of(null));
-    createComponent();
-  }
-
-  function createComponent() {
-    fixture = TestBed.createComponent(UserBarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }
-
   it('should create', () => {
     setupAnonymousUser();
     expect(component).toBeTruthy();
@@ -86,6 +70,22 @@ describe('UserBarComponent', () => {
       .textContent)
       .toEqual('Login page');
   });
+
+  function setupLoggedUser() {
+    spyOnProperty(mockAuthService, 'authState', 'get').and.returnValue(Observable.of({name : 'testname'}));
+    createComponent();
+  }
+
+  function setupAnonymousUser() {
+    spyOnProperty(mockAuthService, 'authState', 'get').and.returnValue(Observable.of(null));
+    createComponent();
+  }
+
+  function createComponent() {
+    fixture = TestBed.createComponent(UserBarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
 
 
 });
