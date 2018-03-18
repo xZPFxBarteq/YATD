@@ -5,7 +5,10 @@
                   [(value)]="serverUrl"
                   (change)="changeServerUrl()"
                   placeholder="Server">
-        <mat-option value="https://todos.venturedevs.net/">https://todos.venturedevs.net/</mat-option>
+        <mat-option *ngFor="let url of serverUrls"
+                    [value]="url">
+          {{url}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card-content>

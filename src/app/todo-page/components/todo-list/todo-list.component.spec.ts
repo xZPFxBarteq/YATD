@@ -11,6 +11,7 @@ import {FormsModule} from "@angular/forms";
 import {ArrayUpdaterService} from "../../../shared/services/array-updater.service";
 import {TodoRepositoryService} from "./services/todo-repository.service";
 import {TodoRepositoryMock} from "./mocks/todo-repository-mock";
+import {FilterByCompletionPipe} from "./pipes/filter-by-completion.pipe";
 
 describe('TodoListComponent', () => {
   let component : TodoListComponent;
@@ -18,7 +19,13 @@ describe('TodoListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations : [TodoListComponent, SearchFieldComponent, EditableNameItemComponent, NewItemComponent, NameSearchPipe],
+      declarations : [
+        TodoListComponent,
+        SearchFieldComponent,
+        EditableNameItemComponent,
+        NewItemComponent,
+        NameSearchPipe,
+        FilterByCompletionPipe],
       imports : [MaterialModule, FormsModule],
       providers : [
         {provide : TodoRepositoryService, useClass : TodoRepositoryMock},

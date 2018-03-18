@@ -10,7 +10,8 @@ import {ServerService} from "../shared/services/server.service";
 })
 export class LoginComponent implements OnInit {
 
-  protected serverUrl : string = 'https://todos.venturedevs.net/'
+  protected serverUrl : string = 'https://todos.venturedevs.net/';
+  protected serverUrls : string[] = ['https://todos.venturedevs.net/'];
 
   constructor(private server : ServerService,
               private authService : AuthService,

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatDividerModule,
   MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
-  MatOptionModule, MatSelectModule, MatSidenavModule, MatToolbarModule
+  MatOptionModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatToolbarModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -23,7 +23,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatGridListModule,
     MatDividerModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule {
