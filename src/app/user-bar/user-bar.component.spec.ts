@@ -2,10 +2,12 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserBarComponent} from './user-bar.component';
 import {MaterialModule} from "../modules/material.module";
-import {AuthService, AuthServiceConfig} from "angularx-social-login";
+import {AuthService, AuthServiceConfig, SocialUser} from "angularx-social-login";
 import {Router, RouterModule} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
+import {TodoFixture} from "../shared/classes/todo-fixture";
+import {mock, instance, verify} from 'ts-mockito/lib/ts-mockito';
 
 class AuthServiceMock extends AuthService {
 
@@ -13,9 +15,9 @@ class AuthServiceMock extends AuthService {
 
 describe('UserBarComponent', () => {
   let component : UserBarComponent;
-  let fixture : ComponentFixture<UserBarComponent>;
+  let fixture : TodoFixture<UserBarComponent>;
 
-  let routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+  let routerMock = mock(Router);
   let mockAuthService : AuthServiceMock;
 
   beforeEach(async(() => {
@@ -25,7 +27,7 @@ describe('UserBarComponent', () => {
       imports : [MaterialModule, RouterModule],
       providers : [
         {provide : AuthService, useValue : mockAuthService},
-        {provide : Router, useValue : routerSpy}]
+        {provide : Router, useValue : instance(routerMock)}]
     })
       .compileComponents();
   }));
@@ -38,41 +40,38 @@ describe('UserBarComponent', () => {
   it('should have correct greeting title', () => {
     setupLoggedUser();
 
-    expect(fixture.nativeElement
-      .querySelector('.userbar-content span:first-child')
-      .textContent)
-      .toEqual('Hi testname!');
+    expect(fixture.cssQuery('.userbar-content span:first-child').textContent).toEqual('Hi testname!');
   });
 
   it('should have logout button for logged user', () => {
     setupLoggedUser();
 
-    expect(fixture.nativeElement
-      .querySelector('.action')
-      .textContent)
-      .toEqual('Logout');
+    expect(fixture.cssQuery('.action').textContent).toEqual('Logout');
+  });
+
+  it('should have logout logged user', () => {
+    setupLoggedUser();
+    fixture.clickButton('.action');
+    fixture.whenStable().then(() => {
+      verify(routerMock.navigateByUrl('/login')).once();
+    });
   });
 
   it('should have correct title for anonymous', () => {
     setupAnonymousUser();
 
-    expect(fixture.nativeElement
-      .querySelector('.userbar-content span:first-child')
-      .textContent)
-      .toEqual('Yet Another To Do management app');
+    expect(fixture.cssQuery('.userbar-content span:first-child').textContent).toEqual('Yet Another To Do management app');
   });
 
   it('should have login page button for anonymous', () => {
     setupAnonymousUser();
 
-    expect(fixture.nativeElement
-      .querySelector('.action')
-      .textContent)
-      .toEqual('Login page');
+    expect(fixture.cssQuery('.action').textContent).toEqual('Login page');
   });
 
   function setupLoggedUser() {
-    spyOnProperty(mockAuthService, 'authState', 'get').and.returnValue(Observable.of({name : 'testname'}));
+    spyOnProperty(mockAuthService, 'authState', 'get').and.returnValue(Observable.of(socialUser('testname')));
+    spyOn(mockAuthService, 'signOut').and.returnValue(Promise.resolve());
     createComponent();
   }
 
@@ -82,9 +81,15 @@ describe('UserBarComponent', () => {
   }
 
   function createComponent() {
-    fixture = TestBed.createComponent(UserBarComponent);
+    fixture = new TodoFixture<UserBarComponent>(TestBed.createComponent(UserBarComponent));
     component = fixture.componentInstance;
     fixture.detectChanges();
+  }
+
+  function socialUser(name : string) : SocialUser {
+    let user : SocialUser = new SocialUser();
+    user.name = name;
+    return user;
   }
 
 
