@@ -2,8 +2,9 @@
 <mat-divider></mat-divider>
 <search-field #search></search-field>
 <mat-divider></mat-divider>
-<mat-list class="todo">
-  <mat-list-item *ngFor="let todo of todos | nameSearch:search.searchedValue">
+<mat-list class="todos">
+  <mat-list-item *ngFor="let todo of todos | nameSearch:search.searchedValue"
+                 [id]="todo.id">
     <editable-name-item [ngClass]="{'completed' : todo.is_complete}"
                         [id]="todo.id"
                         [name]="todo.name"
