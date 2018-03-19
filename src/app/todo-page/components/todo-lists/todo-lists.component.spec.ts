@@ -45,7 +45,7 @@ describe('TodoListsComponent', () => {
     fixture.clickButton('#existingTestList editable-name-item button:nth-of-type(1)');
 
     fixture.whenStable().then(() => {
-      let lists : HTMLDivElement = fixture.nativeElement.querySelector('.to-do-lists');
+      let lists : HTMLDivElement = fixture.nativeElement.querySelector('.todo-lists');
       expect(lists.querySelector('#existingTestList')).toBeNull();
     })
   }));
