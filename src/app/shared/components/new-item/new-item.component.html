@@ -1,5 +1,7 @@
 <div class="add-new-item">
   <button mat-mini-fab
+          matTooltip="Add new"
+          matTooltipShowDelay="1500"
           [disabled]="nameIsEmpty()"
           (click)="addNewItem()">
     <mat-icon svgIcon="add"></mat-icon>

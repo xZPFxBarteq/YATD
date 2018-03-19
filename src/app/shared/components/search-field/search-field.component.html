@@ -1,5 +1,8 @@
 <div class='search'>
-  <button mat-mini-fab (click)="cancelSearch()">
+  <button mat-mini-fab
+          matTooltip="Clear"
+          matTooltipShowDelay="1500"
+          (click)="cancelSearch()">
     <mat-icon svgIcon="cancel"></mat-icon>
   </button>
   <mat-form-field>

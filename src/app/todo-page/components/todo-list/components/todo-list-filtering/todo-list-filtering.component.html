@@ -1,6 +1,9 @@
 <div class="todo-list-filter">
   <mat-radio-group [(ngModel)]="chosenFilter">
-    <button mat-mini-fab [disabled]="true">
+    <button mat-mini-fab
+            matTooltip="Filter"
+            matTooltipShowDelay="1500"
+            [disabled]="true">
       <mat-icon svgIcon="filter"></mat-icon>
     </button>
     <mat-radio-button *ngFor="let filterOption of filterOptions"

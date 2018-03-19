@@ -1,8 +1,14 @@
 <div class="editable-name-item">
-  <button mat-mini-fab (click)="removeItem()">
+  <button mat-mini-fab
+          matTooltip="Remove"
+          matTooltipShowDelay="1500"
+          (click)="removeItem()">
     <mat-icon svgIcon="delete"></mat-icon>
   </button>
-  <button mat-mini-fab (click)="editName()">
+  <button mat-mini-fab
+          matTooltip="Edit name"
+          matTooltipShowDelay="1500"
+          (click)="editName()">
     <mat-icon svgIcon="edit"></mat-icon>
   </button>
   <div class="name-edit" *ngIf="isCurrentlyEdited()">
