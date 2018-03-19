@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   margin-left: 66px;
+  min-width: 450px;
 }
 
 .todo-list-filter mat-radio-group mat-radio-button {

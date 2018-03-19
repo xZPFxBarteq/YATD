@@ -2,7 +2,7 @@
   padding-top: 0;
 }
 
-mat-list mat-list-item editable-name-item {
+.todos mat-list-item editable-name-item {
   width: 90%;
 }
 
@@ -13,12 +13,3 @@ mat-list mat-list-item editable-name-item {
 .completed {
   text-decoration: line-through;
 }
-
-new-item {
-  min-width: 450px;
-}
-
-search-field {
-  min-width: 450px;
-}
-

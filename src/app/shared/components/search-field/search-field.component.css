@@ -1,6 +1,7 @@
 .search {
   padding-left: 16px;
   padding-right: 16px;
+  min-width: 450px;
 }
 
 .search button {
