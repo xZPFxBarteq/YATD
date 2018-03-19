@@ -1,0 +1,10 @@
+<div class="todo-list-filter">
+  <mat-radio-group [(ngModel)]="chosenFilter">
+    <button mat-mini-fab [disabled]="true">
+      <mat-icon svgIcon="filter"></mat-icon>
+    </button>
+    <mat-radio-button *ngFor="let filterOption of filterOptions"
+                      [value]="filterOption">{{ filterOption }}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>

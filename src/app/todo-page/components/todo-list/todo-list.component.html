@@ -1,15 +1,11 @@
 <new-item (onNewItemAdded)="addNewTodo($event)"></new-item>
 <mat-divider></mat-divider>
-<search-field #search>
-  <mat-radio-group [(ngModel)]="filter">
-    <mat-radio-button *ngFor="let filterOption of filterOptions"
-                      [value]="filterOption">{{ filterOption }}
-    </mat-radio-button>
-  </mat-radio-group>
-</search-field>
+<search-field #search></search-field>
+<mat-divider></mat-divider>
+<todo-list-filtering #filter></todo-list-filtering>
 <mat-divider></mat-divider>
 <mat-list class="todos">
-  <mat-list-item *ngFor="let todo of (todos | nameSearch:search.searchedValue | filterByCompletion:filter)"
+  <mat-list-item *ngFor="let todo of (todos | nameSearch:search.searchedValue | filterByCompletion:filter.chosenFilter)"
                  [id]="todo.id">
     <editable-name-item [ngClass]="{'completed' : todo.is_complete}"
                         [id]="todo.id"

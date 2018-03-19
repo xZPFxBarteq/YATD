@@ -1,0 +1,10 @@
+.todo-list-filter {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  margin-left: 66px;
+}
+
+.todo-list-filter mat-radio-group mat-radio-button {
+  padding-left: 5px;
+}

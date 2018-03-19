@@ -15,5 +15,6 @@ export class AppComponent {
     iconRegistry.addSvgIcon('add', sanitizer.bypassSecurityTrustResourceUrl('assets/add.svg'));
     iconRegistry.addSvgIcon('cancel', sanitizer.bypassSecurityTrustResourceUrl('assets/cancel.svg'));
     iconRegistry.addSvgIcon('edit', sanitizer.bypassSecurityTrustResourceUrl('assets/edit.svg'));
+    iconRegistry.addSvgIcon('filter', sanitizer.bypassSecurityTrustResourceUrl('assets/filter.svg'));
   }
 }

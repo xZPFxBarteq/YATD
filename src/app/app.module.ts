@@ -26,6 +26,7 @@ import {ErrorHandlerService} from "./shared/services/error-handler.service";
 import {ErrorDialogComponent} from './shared/components/error-dialog/error-dialog.component';
 import {RepositoryService} from "./shared/services/repository.service";
 import { FilterByCompletionPipe } from './todo-page/components/todo-list/pipes/filter-by-completion.pipe';
+import { TodoListFilteringComponent } from './todo-page/components/todo-list/components/todo-list-filtering/todo-list-filtering.component';
 
 let authorizationConfig = new AuthServiceConfig([
   {
@@ -47,7 +48,8 @@ let authorizationConfig = new AuthServiceConfig([
     SearchFieldComponent,
     TodoListComponent,
     ErrorDialogComponent,
-    FilterByCompletionPipe
+    FilterByCompletionPipe,
+    TodoListFilteringComponent
   ],
   imports : [
     CoreModule,

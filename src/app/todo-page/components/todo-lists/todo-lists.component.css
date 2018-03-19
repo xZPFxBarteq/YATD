@@ -1,4 +1,8 @@
-.to-do-lists editable-name-item {
+.todo-lists {
+  padding-top: 0;
+}
+
+.todo-lists editable-name-item {
   width: 100%;
   max-width: 420px;
   cursor: pointer;

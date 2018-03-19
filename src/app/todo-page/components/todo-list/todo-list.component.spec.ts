@@ -12,6 +12,7 @@ import {ArrayUpdaterService} from "../../../shared/services/array-updater.servic
 import {TodoRepositoryService} from "./services/todo-repository.service";
 import {TodoRepositoryMock} from "./mocks/todo-repository-mock";
 import {FilterByCompletionPipe} from "./pipes/filter-by-completion.pipe";
+import {TodoListFilteringComponent} from "./components/todo-list-filtering/todo-list-filtering.component";
 
 describe('TodoListComponent', () => {
   let component : TodoListComponent;
@@ -24,6 +25,7 @@ describe('TodoListComponent', () => {
         SearchFieldComponent,
         EditableNameItemComponent,
         NewItemComponent,
+        TodoListFilteringComponent,
         NameSearchPipe,
         FilterByCompletionPipe],
       imports : [MaterialModule, FormsModule],

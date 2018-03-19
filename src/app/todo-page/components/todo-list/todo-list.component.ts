@@ -4,7 +4,6 @@ import {Todo} from "./classes/todo";
 import {NameChangeEvent} from "../../../shared/classes/name-change-event";
 import * as _ from "lodash";
 import {ArrayUpdaterService} from "../../../shared/services/array-updater.service";
-import {TodoCompletionFilter} from "./classes/todo-completion-filter.enum";
 
 @Component({
   selector : 'todo-list',
@@ -15,12 +14,7 @@ export class TodoListComponent implements OnInit {
 
   @Input() public todoListId : string;
   protected todos : Todo[];
-  protected filterOptions : TodoCompletionFilter[] = [
-    TodoCompletionFilter.ALL,
-    TodoCompletionFilter.ONLY_COMPLETE,
-    TodoCompletionFilter.ONLY_INCOMPLETE
-  ];
-  protected filter : TodoCompletionFilter = TodoCompletionFilter.ALL;
+
 
   constructor(private todoRepository : TodoRepositoryService,
               private arrayUpdater : ArrayUpdaterService) {
